@@ -34,7 +34,7 @@ public class HelloWorldServlet extends HttpServlet {
 		
 		out.println("<html><head><title>Servlet Page</title></head>");
 		out.println("<body>");
-		out.println("오늘 날짜와 시간은 : " + new Date());
+		out.println("현재 날짜와 시간은 : " + new Date());
 		out.println("</body></html>");
 		
 		
