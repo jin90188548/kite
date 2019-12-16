@@ -4,6 +4,7 @@
 
 ### Eclipse ###
 .Servers
+.Servers/
 .metadata
 bin/
 tmp/
