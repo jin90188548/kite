@@ -29,7 +29,7 @@
 	<%@ include file="include/right.jsp" %>
 	
 	<jsp:include page="include/footer.jsp">
-		<jsp:param value="1" name="menu_code"/>
+		<jsp:param value="2" name="menu_code"/>
 		<jsp:param value="test123@test.com" name="email"/>
 		<jsp:param value="010-1111-3333" name="tel"/>
 	</jsp:include>
