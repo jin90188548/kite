@@ -12,6 +12,34 @@
   
   
   
+   <!-- 서블릿 등록, 필터 등록, 리스너, 파라미터 -->
+   
+   <context-param>
+   	<param-name>driver</param-name>
+   	<param-value>Oracle</param-value>
+   </context-param>
+  
+  <context-param>
+  	<description>설명</description>
+  	<param-name>debugMode</param-name>
+  	<param-value>line</param-value>
+  </context-param>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
