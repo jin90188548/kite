@@ -7,6 +7,8 @@ public class LoginInfo {
 	private String gender;
 	private int byear;
 	
+	public LoginInfo() {}
+	
 	public LoginInfo(String name, String id, String gender, int byear) {
 		this.name = name;
 		this.id = id;
@@ -45,6 +47,13 @@ public class LoginInfo {
 	public void setByear(int byear) {
 		this.byear = byear;
 	}
+
+	@Override
+	public String toString() {
+		return "LoginInfo [name=" + name + ", id=" + id + ", gender=" + gender + ", byear=" + byear + "]";
+	}
+	
+	
 	
 	
 	
