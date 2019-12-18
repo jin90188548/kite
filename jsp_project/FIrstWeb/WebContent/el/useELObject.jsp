@@ -28,9 +28,12 @@
 	%>
 
 	요청 URI : ${pageContext.request.requestURI} <br>
-	request name 속성 값 : ${requestScope.name} <br>
+	request name 속성 값 : ${requestScope.name} <br>	
+	request 객체 생략 name 속성 값 : ${name} <br>
 	session loginInfo 객체 : ${sessionScope.loginInfo} <br>
+	session 객체 생략 loginInfo 객체 : ${loginInfo} <br>
 	session loginInfo 객체 id  : ${sessionScope.loginInfo.id} <br>
+	session 객체 생략 loginInfo 객체 id  : ${loginInfo.id} <br>
 	code 파라미터 : ${param.code}
 	
 

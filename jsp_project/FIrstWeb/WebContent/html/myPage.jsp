@@ -40,10 +40,10 @@
 	
 		<h1> 회원 정보</h1>
 		<h3>
-			이름 : <%= info.getName()%> <br>
-			아이디 : <%= info.getId()%> <br>
-			성별 :  <%= info.getGender()%> <br>
-			태어난 년도 :  <%= info.getByear()%> <br>
+			이름 : <%= info.getName()%> / ${loginInfo.name} <br>
+			아이디 : <%= info.getId()%> / ${loginInfo.id} <br>
+			성별 :  <%= info.getGender()%> / ${loginInfo.gender} <br>
+			태어난 년도 :  <%= info.getByear()%> ${loginInfo.byear} <br>
 		</h3>
 		<a href="logout.jsp">로그아웃</a>
 	
