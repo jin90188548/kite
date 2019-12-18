@@ -44,12 +44,19 @@
 	<table border="1" style="width:100%">
 	
 		<tr>
+			<td>index</td>
+			<td>count</td>
 			<td>아이디</td>
 			<td>이름</td>
 		</tr>
 		
-		<c:forEach items="${applicationScope.members}" var="info">			
+		<c:forEach 
+			items="${applicationScope.members}" 
+			var="info" 
+			varStatus="stat"	>		
 		<tr>
+			<td>${stat.index}</td>
+			<td>${stat.count}</td>
 			<td>${info.uid}</td>
 			<td><%-- ${info.uname} /	 --%>	
 				<c:out value="${info.uname}" escapeXml="false">
