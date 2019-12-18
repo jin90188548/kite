@@ -16,6 +16,10 @@ public class MemberInfo {
 		this.gender = gender;
 		this.byear = byear;
 	}
+	
+	public MemberInfo(String uid,  String uname) {
+		this(uid, null, uname, null, 0);
+	}
 
 	public MemberInfo() {
 		super();

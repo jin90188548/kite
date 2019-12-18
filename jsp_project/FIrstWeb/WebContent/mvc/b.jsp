@@ -23,10 +23,10 @@
 <body>
 
 	<h1>view b </h1>
-	<% 
+	<%-- 
 		String resultData = (String)request.getAttribute("result");
-	%>
-	<h1> 결과 : <%= resultData %></h1>
+	--%>
+	<h1> 결과 : ${result}<%--= resultData --%></h1>
 	
 	
 	

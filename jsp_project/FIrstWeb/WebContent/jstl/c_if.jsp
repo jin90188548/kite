@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html>
@@ -22,20 +23,36 @@
 </head>
 <body>
 
-	<h1>view c </h1>
+	<c:set var="msg" value="users-123" />
+	<h1>msg : ${msg}</h1>
 	
-	<h1> 결과 : ${result}</h1>
-	
-	
-	
-	
-	
+	<c:if test="${msg eq 'users-123'}">
+		<h1>반갑습니다 ${msg}님.</h1>
+	</c:if>
 	
 	
+	<c:if test="${msg ne 'users-12'}">
+		<h1>로그인 해주세요.</h1>
+	</c:if>
 	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
