@@ -61,6 +61,12 @@ public class MemberInfo {
 	public void setByear(int byear) {
 		this.byear = byear;
 	}
+
+	@Override
+	public String toString() {
+		return "MemberInfo [uid=" + uid + ", pw=" + pw + ", uname=" + uname + ", gender=" + gender + ", byear=" + byear
+				+ "]";
+	}
 	
 	
 	

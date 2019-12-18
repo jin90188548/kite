@@ -28,7 +28,7 @@ select.byear {
 
 	<h1 class="title">회원가입</h1>
 	<hr>
-	<form action="memberReg.jsp" method="get">
+	<form action="../beans/usebean_1.jsp" method="post">
 		<table class="inputBox">
 			<tr>
 				<td>아이디(이메일)</td>

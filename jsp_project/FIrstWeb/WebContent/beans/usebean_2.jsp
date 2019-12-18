@@ -20,30 +20,21 @@
 </style>
 </head>
 <body>
+
+	<jsp:useBean id="member" class="member.MemberInfo" scope="request" />
 	<!-- 
 		MemberInfo member = (Memberinfo)request.getAttribute("member");
 	
 		MemberInfo member = new MemberInfo();
 		request.setAttribute("member", member) ;
 	-->
-	<jsp:useBean id="member" class="member.MemberInfo" scope="request" />
-	<jsp:setProperty property="*" name="member"/>
-	
-	<%= member %>
-
-	<%-- <% 
-		member.setUname("son");
-	%>
-	
-	<%= member.getByear() %> : <%= member.getUname() %> --%>
+		
+	<%= member.getByear() %> : <%= member.getUname() %>
 	
 	
+	<br>
 	
 	<jsp:useBean id="loginInfo" class="member.LoginInfo" scope="session" />
-	
-	<%
-		loginInfo.setId("ryuyj76@naver.com");
-	%>
 	
 	
 	<%= loginInfo %>
