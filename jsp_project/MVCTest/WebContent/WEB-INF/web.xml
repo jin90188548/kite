@@ -11,6 +11,16 @@
   </welcome-file-list>
   
   <servlet>
+  	<servlet-name>frontController</servlet-name>
+  	<servlet-class>mvctest.FrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>frontController</servlet-name>
+  	<url-pattern>/</url-pattern>
+  </servlet-mapping>
+  
+  
+<!--   <servlet>
   	<servlet-name>simpleController</servlet-name>
   	<servlet-class>mvctest.SimpleController</servlet-class>
   </servlet>
@@ -18,7 +28,7 @@
   <servlet-mapping>
   	<servlet-name>simpleController</servlet-name>
   	<url-pattern>/simple</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> -->
   
   
   
