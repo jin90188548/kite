@@ -25,13 +25,12 @@
 </head>
 <body>
 
+
 	<%
-		// 한글 처리 
-		request.setCharacterEncoding("utf-8");
 	
-		String deptno = request.getParameter("deptno");
-		String dname = request.getParameter("dname");
-		String loc = request.getParameter("loc");
+		String dno = request.getParameter("dno");
+	
+		String sql = "delete from dept where deptno=?";
 		
 		// 1. 드라이버 로드 : Servlet에서 초기화 처리
 		// 2. Connection 객체 생성
@@ -43,31 +42,24 @@
 		
 		Connection conn = ConnectionProvider.getConnection();
 		
-		// 3. PreparedStatement
-		String sql = "insert into dept values (?, ?, ?) ";
-		PreparedStatement pstmt =conn.prepareStatement(sql);
-		pstmt.setInt(1, Integer.parseInt(deptno));
-		pstmt.setString(2, dname);
-		pstmt.setString(3, loc);
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, Integer.parseInt(dno));
 		
 		int result = pstmt.executeUpdate();
 		
-		if(result > 0) {
-	%>
-	<h1>데이터가 입력되었습니다.</h1>
-	<%	} else { %>
-	<h1>데이터 이력이 되지 않았습니다. 확인해주세요.</h1>
-	<% 	} 
-	
-		
-		pstmt.close();
-		conn.close();
-	
-	
+		if(result>0){
+			
 	%>
 	
-	<a href="dept_list.jsp"> 부서 리스트 보기 </a>
+	<h1><%= dno %>번 부서의 정보가 삭제 되었습니다.</h1>
+	
+	<%	} else {%>
+	
+	<h1>삭제하고하는 정보가 없습니다.</h1>
+	
+	<%	} %>
 
+	<a href="dept_list.jsp"> 부서 리스트 보기 </a>
 
 
 

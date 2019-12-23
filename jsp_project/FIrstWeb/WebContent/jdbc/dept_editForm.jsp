@@ -1,3 +1,4 @@
+<%@page import="jdbc.ConnectionProvider"%>
 <%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -32,13 +33,16 @@
 		
 		// 1. 드라이버 로드
 		// 2. Connection 객체생성
-		
+		/* 
 		String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:orcl";
 		String user = "scott";
 		String pw = "tiger";
 		
 		Connection conn = DriverManager.getConnection(jdbcUrl, user, pw);
-		
+		 */
+		 
+		 Connection conn = ConnectionProvider.getConnection();
+		 
 		// 3. Statement
 		Statement stmt = conn.createStatement();
 		

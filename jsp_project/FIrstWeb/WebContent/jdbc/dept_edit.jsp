@@ -1,3 +1,4 @@
+<%@page import="jdbc.ConnectionProvider"%>
 <%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -34,12 +35,13 @@
 	
 	// 1. 드라이버 로드 : Servlet에서 초기화 처리
 	// 2. Connection 객체 생성
-	String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:orcl";
+	/* String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:orcl";
 	String user = "scott";
 	String pw = "tiger";
 	
-	Connection conn = DriverManager.getConnection(jdbcUrl, user, pw);
+	Connection conn = DriverManager.getConnection(jdbcUrl, user, pw); */
 	
+	Connection conn = ConnectionProvider.getConnection();
 	
 	String sql = "update dept set dname=?, loc=? where deptno=? ";
 	PreparedStatement pstmt = conn.prepareStatement(sql);

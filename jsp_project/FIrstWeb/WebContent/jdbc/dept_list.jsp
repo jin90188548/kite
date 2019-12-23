@@ -1,3 +1,4 @@
+<%@page import="jdbc.ConnectionProvider"%>
 <%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -36,12 +37,13 @@
 	
 		//2. 컨넥션
 		
-		String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:orcl";
+		/* String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:orcl";
 		String user = "scott";
 		String pw = "tiger";
 		
 		Connection conn = DriverManager.getConnection(jdbcUrl, user, pw);
-	
+	 */
+	 Connection conn = ConnectionProvider.getConnection();
 		
 		// 3. Statement 객체 생성
 		
@@ -71,7 +73,7 @@
 			<td>
 				<a href="dept_editForm.jsp?dno=<%= rs.getInt("deptno")%>">수정</a>
 				|
-				<a href="dept_delete.jsp?dno=<%= rs.getInt(1)%>">삭제</a>
+				<a href="javascript:del(<%=rs.getInt(1)%>)">삭제</a>
 			</td>
 		<tr>		
 	<%
@@ -83,6 +85,23 @@
 	
 	%>
 	</table>
+	
+	<script>
+		
+		function del(dno){
+			
+			var chk = confirm("삭제하시겠습니까?");
+			
+			if(chk){
+				
+				location.href = "dept_delete.jsp?dno="+dno;
+				//alert(dno+'번호의 부서가 삭제되었습니다.');
+			}
+			
+			
+		}
+	
+	</script>
 
 
 

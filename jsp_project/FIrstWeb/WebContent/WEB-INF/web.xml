@@ -33,6 +33,10 @@
 	<servlet>
 		<servlet-name>JDBCDriverLoad</servlet-name>
 		<servlet-class>jdbc.DirverLoad</servlet-class>
+		<init-param>
+			<param-name>jdbcdriver</param-name>
+			<param-value>oracle.jdbc.driver.OracleDriver</param-value>
+		</init-param>		
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	
