@@ -125,6 +125,21 @@ public class MemberDao {
 		return result;
 	}
 
+	public int deleteMemberByIdx(Connection conn, int idx) throws SQLException {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = "delete from opmember where idx=?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, idx);
+		
+		result = pstmt.executeUpdate();
+		
+		
+		return result;
+	}
+
 	
 	
 	
