@@ -28,7 +28,7 @@ select.byear {
 
 	<h1 class="title">회원가입</h1>
 	<hr>
-	<form action="" method="post">
+	<form action="reg" method="post">
 		<table class="inputBox">
 			<tr>
 				<td>아이디(이메일)</td>
