@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import service.IndexMemberServiceImpl;
 import service.MemberService;
 import service.RegFormMemberServiceImpl;
+import service.RegMemberServiceImpl;
 
 public class FrontController extends HttpServlet {
 	
@@ -30,7 +31,7 @@ public class FrontController extends HttpServlet {
 		uriMap.put("/index", new IndexMemberServiceImpl());
 		// /member/regForm
 		uriMap.put("/member/regForm", new RegFormMemberServiceImpl());
-		uriMap.put("/member/reg", new RegFormMemberServiceImpl());
+		uriMap.put("/member/reg", new RegMemberServiceImpl());
 		
 		
 		// 기능 확장 : Service 구현 클래스 생성 , view(JSP) 생성
