@@ -23,7 +23,17 @@
 </head>
 <body>
 
-	${resultCnt}
+	
+	
+	<c:if test="${resultCnt==1}">
+		<h1>회원 가입입 되었습니다.</h1>
+	</c:if>
+
+	<c:if test="${resultCnt==0 or resultCnt == -1}">
+		<h1>회원 가입중에 오류가 발생했습니다. 다시 시도해주세요.</h1>
+		<a href="regForm">회원가입하기</a> 
+	</c:if>
+
 
 
 
