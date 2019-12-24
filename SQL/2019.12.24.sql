@@ -14,5 +14,6 @@ create SEQUENCE member_idx_seq;
 insert into opmember values (MEMBER_IDX_SEQ.nextval, 'test@test', 'teseter', '1111', 'm', 2000, null);
 insert into opmember values (MEMBER_IDX_SEQ.nextval, ?, ?, ?, ?, ?, ?);
 
-select * from opmember;
+select * from opmember order by idx
+;
 
