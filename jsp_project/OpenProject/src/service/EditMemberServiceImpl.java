@@ -14,6 +14,7 @@ public class EditMemberServiceImpl implements MemberService {
 
 	@Override
 	public String process(HttpServletRequest request) {
+		
 		String viewPage = "/WEB-INF/views/edit.jsp";
 		
 
@@ -60,7 +61,7 @@ public class EditMemberServiceImpl implements MemberService {
 			e.printStackTrace();
 		}
 		
-		request.setAttribute("resultCode", result);
+		request.setAttribute("resultCnt", result);
 		
 		
 		
