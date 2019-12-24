@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.DeleteMemberServiceImpl;
 import service.EditFormMemberService;
 import service.EditMemberServiceImpl;
 import service.IndexMemberServiceImpl;
@@ -43,6 +44,9 @@ public class FrontController extends HttpServlet {
 		uriMap.put("/member/editForm", new EditFormMemberService());
 		uriMap.put("/member/edit", new EditMemberServiceImpl());
 		
+		
+		// 회원정보 삭제
+		uriMap.put("/member/delete", new DeleteMemberServiceImpl());
 		
 		// 기능 확장 : Service 구현 클래스 생성 , view(JSP) 생성
 		
