@@ -18,10 +18,26 @@
 		margin : 0;
 		padding : 0;
 	}
+	
+	#nav {
+		overflow: hidden;
+		list-style: none;
+		margin : 10px 0;
+		border-top : 1px solid #999;
+		border-bottom : 1px solid #999;
+	}
+	#nav>li {
+		float : left;
+		padding : 3px 30px;
+	}
+	
 
 </style>
 </head>
 <body>
+
+<%@ include file="/WEB-INF/views/frame/header.jsp" %>
+
 
 	<h1>회원 리스트</h1>
 	
@@ -51,13 +67,24 @@
 			<td>
 				<a href="editForm?midx=${member.idx}">수정</a> 
 				| 
-				<a href="delete">삭제</a>
+				<a href="javascript:delMem(${member.idx})">삭제</a>
 			</td>		
 		</tr>
 		</c:forEach>
 	</table>
 
-
+	<script>
+	
+		function delMem(idx){
+			
+			var chk = confirm("삭제 하시겠습니까?");
+			if(chk) {
+				location.href = 'delete?midx='+idx;
+				// /op/member/list  -> /op/member/delete
+			}
+		}
+	
+	</script>
 
 
 
