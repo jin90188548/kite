@@ -80,4 +80,57 @@ public class MemberDao {
 
 	}
 
+	// idx로 회원 정보 검색
+	public OpMember selectByIdx(Connection conn, int idx) throws SQLException {
+		
+		OpMember member = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs ;
+		
+		String sql = "select * from opmember where idx=?";
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, idx);
+		
+		rs = pstmt.executeQuery();
+		
+		if(rs.next()) {
+			member = makeOpMember(rs);
+		}
+		
+		
+		return member;
+	}
+
+	public int editMember(Connection conn, OpMember member) throws SQLException {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = "update opmember set "
+				+ " uname=?, upw=?, gender=?, byear=? WHERE idx=?";
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, member.getUname());
+		pstmt.setString(2, member.getPw());
+		pstmt.setString(3, member.getGender());
+		pstmt.setInt(4, member.getByear());
+		pstmt.setInt(5, member.getIdx());
+		
+		result = pstmt.executeUpdate();
+		
+		
+		return result;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
 }
