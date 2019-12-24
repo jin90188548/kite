@@ -30,8 +30,10 @@ public class FrontController extends HttpServlet {
 		uriMap.put("/index", new IndexMemberServiceImpl());
 		// /member/regForm
 		uriMap.put("/member/regForm", new RegFormMemberServiceImpl());
+		uriMap.put("/member/reg", new RegFormMemberServiceImpl());
 		
-		// 기능 확장 : Service 구현 클래스 생성 
+		
+		// 기능 확장 : Service 구현 클래스 생성 , view(JSP) 생성
 		
 		
 	}
