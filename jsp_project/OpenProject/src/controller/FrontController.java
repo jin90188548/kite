@@ -15,7 +15,10 @@ import service.EditFormMemberService;
 import service.EditMemberServiceImpl;
 import service.IndexMemberServiceImpl;
 import service.LIstMemberServiceImpl;
+import service.LoginFormMemberServiceImpl;
+import service.LoginMemberServiceImpl;
 import service.MemberService;
+import service.MyPageMemberServiceImpl;
 import service.RegFormMemberServiceImpl;
 import service.RegMemberServiceImpl;
 
@@ -47,6 +50,13 @@ public class FrontController extends HttpServlet {
 		
 		// 회원정보 삭제
 		uriMap.put("/member/delete", new DeleteMemberServiceImpl());
+		
+		//회원 로그인
+		uriMap.put("/login/loginForm", new LoginFormMemberServiceImpl());
+		uriMap.put("/login/login", new LoginMemberServiceImpl());
+		
+		//회원 마이페이지 
+		uriMap.put("/users/mypage", new MyPageMemberServiceImpl());
 		
 		// 기능 확장 : Service 구현 클래스 생성 , view(JSP) 생성
 		

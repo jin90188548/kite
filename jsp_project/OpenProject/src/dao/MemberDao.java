@@ -140,6 +140,27 @@ public class MemberDao {
 		return result;
 	}
 
+
+
+	public OpMember selectByUserIdPw(Connection conn, String uid, String pw) throws SQLException {
+		OpMember member = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "select * from opmember where uemail=? and pw=?";
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, uid); 
+		pstmt.setString(2, pw); 
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		if(rs.next()) {
+			member = makeOpMember(rs);
+		}
+		
+		return member;
+	}
+
 	
 	
 	

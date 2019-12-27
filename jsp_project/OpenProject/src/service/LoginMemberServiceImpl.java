@@ -10,7 +10,7 @@ import dao.MemberDao;
 import jdbc.ConnectionProvider;
 import model.OpMember;
 
-public class RegMemberServiceImpl implements MemberService {
+public class LoginMemberServiceImpl implements MemberService {
 
 	@Override
 	public String process(HttpServletRequest request) {
@@ -21,7 +21,7 @@ public class RegMemberServiceImpl implements MemberService {
 		// DAO 의 응답은 처리 횟수 : 결과 데이터 -> view 전달 request에 저장
 		// view 응답 데이터를 받아서 
 		
-		String viewPage = "/WEB-INF/views/memberReg.jsp";
+		String viewPage = "/WEB-INF/views/login.jsp";
 		
 		try {
 			request.setCharacterEncoding("utf-8");
@@ -33,40 +33,41 @@ public class RegMemberServiceImpl implements MemberService {
 		// 데이터 받기
 		String uid = request.getParameter("uid");
 		String pw = request.getParameter("pw");
-		String uname = request.getParameter("uname");
-		String byear = request.getParameter("byear");
-		String gender = request.getParameter("gender");
-		String uphoto = request.getParameter("pfile");
+		String refferPage = request.getParameter("refferPage");
 		
-		OpMember member = new OpMember(
-				0, 
-				uid, 
-				pw, 
-				uname, 
-				Integer.parseInt(byear), 
-				gender, 
-				uphoto);
+		String reffer = "/";
 		
-		System.out.println("insert Data : " + member);
+		if(refferPage != null) {
+			reffer = refferPage;
+		}
+
 		
 		Connection conn = null ;
-		int resultCnt = 0;
 		
 		MemberDao dao = new MemberDao();
+		
+		boolean loginChk = false;
 		
 		try {
 			conn = ConnectionProvider.getConnection();
 			
-			resultCnt = dao.insertMember(conn, member);
+			OpMember member = dao.selectByUserIdPw(conn, uid, pw);
+			
+			if(member != null) {
+				
+				// 세션데이터에 비밀번호는 저장하지 않습니다.
+				member.setPw(null);
+				request.getSession(false).setAttribute("loginInfo", member);
+				
+				loginChk = true ;
+			}
 			
 		} catch (SQLException se) {
-			resultCnt = -1;
 			se.printStackTrace();
 		}
-				
 		
-		request.setAttribute("resultCnt", resultCnt);
-				
+		request.setAttribute("loginChk", loginChk);	
+		request.setAttribute("refferPage", reffer);
 		
 		return viewPage;
 	}
