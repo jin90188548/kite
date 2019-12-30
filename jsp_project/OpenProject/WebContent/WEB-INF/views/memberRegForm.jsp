@@ -45,6 +45,10 @@ select.byear {
 	color : blue;
 }
 
+#idcheck {
+	display: none;
+}
+
 </style>
 
 
@@ -57,11 +61,14 @@ select.byear {
 
 	<h1 class="title">회원가입</h1>
 	<hr>
-	<form action="reg" method="post">
+	<form action="reg" method="post" id="form">
 		<table class="inputBox">
 			<tr>
 				<td>아이디(이메일)</td>
 				<td><input type="text" name="uid" id="uid">
+					
+					<input type="checkbox" id="idcheck">
+					
 					<span id="idchk_msg"></span>
 				</td>
 			</tr>
@@ -75,8 +82,8 @@ select.byear {
 			</tr>
 			<tr>
 				<td>성별</td>
-				<td>남 <input type="radio" name="gender" value="m"> 여 <input
-					type="radio" name="gender" value="w">
+				<td>남 <input type="radio" name="gender" value="m" id="gender1"> 여 <input
+					type="radio" name="gender" value="w" id="gender2">
 				</td>
 			</tr>
 			<tr>
@@ -104,6 +111,69 @@ select.byear {
 			for (var i = 2019; i >= 1950; i--) {
 				selectOptions += '<option value="'+i+'">' + i + '</option>\n';
 			}
+			
+			$('#form').submit(function(){
+				
+				var f_uid = $('#uid');
+				
+				if(f_uid.val().length<1){
+					alert('아이디(이메일) 데이터를 입력해야합니다.');
+					f_uid.focus();
+					return false;
+				}
+				
+				var f_pw = $('#pw');
+				if(f_pw.val().length<1) {
+					alert('비밀번호는 필수 항목입니다.');
+					f_pw.focus();
+					return false;
+				}
+
+				
+				var f_uname = $('#uname');
+				if(f_uname.val().length<1) {
+					alert('이름은 필수 항목입니다.');
+					f_uname.focus();
+					return false;
+				}
+				
+				var f_gender1 = $('#gender1').prop('checked');
+				var f_gender2 = $('#gender2').prop('checked');
+				
+				if(f_gender1==false && f_gender2==false){
+					alert('성별체크는 필수사항입니다.');
+					return false;
+				}
+					
+					
+				var f_idcheck = $('#idcheck')
+				if(!f_idcheck.prop('checked')){
+					alert('사용의 아이디가 사용가능 유무를 체크해주셔야합니다.');
+					return false;
+				}
+				
+				$.ajax({
+					url:'reg_ajax',
+					type:'post',
+					data:$(this).serialize(),
+					success : function(data){
+						if(data=='success'){
+							alert('회원가입되었습니다.');
+							location.href='../'
+						} else {
+							alert('회원 가입 처리중에 오류가 발생했습니다.');
+						}
+						
+					}
+				});
+				
+				
+				
+				return false;
+				
+			});
+			
+			
 
 			$('#byear').html(selectOptions);
 			
@@ -111,6 +181,7 @@ select.byear {
 				
 				$(this).val('');
 				$('#idchk_msg').text('');
+				$('#idcheck').prop("checked", false);
 				
 			});
 			
@@ -118,6 +189,13 @@ select.byear {
 				//alert("focusout 이벤트");
 				
 				var param = $(this).val();
+				
+				if(param.length<3){
+					//alert('아이디는 12자리 이상의 문자만 가능합니다.');
+					$('#idchk_msg').text('아이디는 12자리 이상의 문자만 가능합니다.');
+					$('#idchk_msg').addClass('color_red');
+					return false;
+				}
 				
 				// 비동기 통신 : id 값을 전송 후 Y 또는 N의 값을 받는 통신 
 				$.ajax({
@@ -133,10 +211,12 @@ select.byear {
 						
 						if(data=='Y'){
 							$('#idchk_msg').text('사용 가능한 아이디(이메일) 입니다.');
+							$('#idcheck').prop("checked", true);
 							$('#idchk_msg').addClass('color_blue');
 						} else {
 							$('#idchk_msg').text('사용 불가한 아이디(이메일) 입니다.');
-							$('#idchk_msg').addClass('color_red');							
+							$('#idchk_msg').addClass('color_red');
+							$('#idcheck').prop("checked", false);
 						}
 					}
 				});

@@ -17,6 +17,7 @@ import service.IdChkMemberServiceImpl;
 import service.IndexMemberServiceImpl;
 import service.LIstMemberServiceImpl;
 import service.MemberService;
+import service.RegAjaxMemberServiceImpl;
 import service.RegFormMemberServiceImpl;
 import service.RegMemberServiceImpl;
 
@@ -39,6 +40,7 @@ public class FrontController extends HttpServlet {
 		// /member/regForm
 		uriMap.put("/member/regForm", new RegFormMemberServiceImpl());
 		uriMap.put("/member/reg", new RegMemberServiceImpl());
+		uriMap.put("/member/reg_ajax", new RegAjaxMemberServiceImpl());
 		
 		// /member/idChk
 		uriMap.put("/member/idChk", new IdChkMemberServiceImpl());
