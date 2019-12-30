@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery Ajax Basic</title>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: 'parameter.jsp',
+                type: 'GET',
+                data: {
+                    name: $('#txt').val(),
+                    price: '12000'
+                },
+                success: function (data) {
+                	
+                	if(data == 'milk:12000') {
+                		$('body').append(data);	
+                	}
+                	
+                    
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+
+<input type="text" id="txt" value="milk"><br>
+
+</body>
+</html>

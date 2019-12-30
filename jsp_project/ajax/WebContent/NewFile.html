@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<script>
+var requestJsonDataDELETE=function(requestUrl,requestParam,successFunction,errorFunction){
+    
+    $.ajax({
+        url : requestUrl,
+        type : 'DELETE',
+        async: true,
+        data : JSON.stringify(requestParam),
+        dataType : "json",
+        timeout: 10000,    
+        contentType:"application/json",
+        
+        beforeSend:function(){
+            $('.wrap-loading').removeClass('display-none');
+        },
+        complete:function(){
+            $('.wrap-loading').addClass('display-none');
+        },
+        success : function(data){
+            if(successFunction!=undefined){
+                successFunction(data);
+            }
+            
+        },
+        error : function(request,status,error){
+
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            var err=JSON.parse(request.responseText);
+            
+            
+            
+            alert(err.resData[0].errorMsg);
+            if(errorFunction!=undefined){
+                errorFunction();
+            }
+                
+            $('.wrap-loading').addClass('display-none');
+        },
+        fail : function() {
+            alert("인터넷 연결 상태를 확인해주세요.");
+            $('.wrap-loading').addClass('display-none');
+        }
+    });
+}
+
+
+</script>
+
+
+</head>
+<body>
+
+</body>
+</html>
