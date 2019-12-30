@@ -37,6 +37,14 @@ select.byear {
 	float: left;
 	padding: 3px 30px;
 }
+
+.color_red {
+	color : red;
+}
+.color_blue {
+	color : blue;
+}
+
 </style>
 
 
@@ -53,15 +61,17 @@ select.byear {
 		<table class="inputBox">
 			<tr>
 				<td>아이디(이메일)</td>
-				<td><input type="text" name="uid"></td>
+				<td><input type="text" name="uid" id="uid">
+					<span id="idchk_msg"></span>
+				</td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td><input type="password" name="pw"></td>
+				<td><input type="password" name="pw" id="pw"></td>
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td><input type="text" name="uname"></td>
+				<td><input type="text" name="uname" id="uname"></td>
 			</tr>
 			<tr>
 				<td>성별</td>
@@ -96,6 +106,43 @@ select.byear {
 			}
 
 			$('#byear').html(selectOptions);
+			
+			$('#uid').focusin(function(){
+				
+				$(this).val('');
+				$('#idchk_msg').text('');
+				
+			});
+			
+			$('#uid').focusout(function(){
+				//alert("focusout 이벤트");
+				
+				var param = $(this).val();
+				
+				// 비동기 통신 : id 값을 전송 후 Y 또는 N의 값을 받는 통신 
+				$.ajax({
+					url : 'idChk',
+					type : 'get',
+					data : {uid:param},
+					success : function(data){
+						// Y or N
+						//alert(data);
+						
+						$('#idchk_msg').removeClass('color_blue');
+						$('#idchk_msg').removeClass('color_red');
+						
+						if(data=='Y'){
+							$('#idchk_msg').text('사용 가능한 아이디(이메일) 입니다.');
+							$('#idchk_msg').addClass('color_blue');
+						} else {
+							$('#idchk_msg').text('사용 불가한 아이디(이메일) 입니다.');
+							$('#idchk_msg').addClass('color_red');							
+						}
+					}
+				});
+				
+			});
+			
 
 		});
 	</script>

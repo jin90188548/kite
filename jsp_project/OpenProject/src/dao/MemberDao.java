@@ -161,6 +161,24 @@ public class MemberDao {
 		return member;
 	}
 
+	public boolean selectCheckId(Connection conn, String uid) throws SQLException {
+		
+		boolean result = true;
+		
+		String sql = "select * from opmember where uemail=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, uid);
+		ResultSet rs = pstmt.executeQuery();
+		
+		if(rs.next()) {
+			result = false;
+		}
+		
+		
+		
+		return result;
+	}
+
 	
 	
 	
