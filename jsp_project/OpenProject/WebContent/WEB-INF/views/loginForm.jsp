@@ -25,16 +25,16 @@
 
 	<h1>회원 로그</h1>
 	<hr>
-	<form action="edit" method="post">
+	<form action="login" method="post">
 	
-		<input type="hidden" name="refferPage" value="${refferPage}">
+		<input type="hidden" name="refferPage" value="${referer}">
 		
 		<table class="inputBox">
 			<tr>
 				<td>아이디(이메일)</td>
 				<td>
 				
-				<input type="text" name="uid" value="${member.uid}" readonly>
+				<input type="text" name="uid" >
 				
 				</td>
 			</tr>
@@ -44,7 +44,7 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td><input type="submit" value="로그"></td>
+				<td><input type="submit" value="로그인"></td>
 			</tr>
 		</table>
 	</form>

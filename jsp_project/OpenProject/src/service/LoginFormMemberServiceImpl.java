@@ -16,12 +16,12 @@ public class LoginFormMemberServiceImpl implements MemberService {
 		
 		String viewPage = "/WEB-INF/views/loginForm.jsp";
 		
-		String refferPage = request.getHeader("reffer");
+		String refererPage = request.getHeader("referer");
 		
-		System.out.println("refferPage : " + refferPage);
+		System.out.println("referer : " + refererPage);
 
 		
-		request.setAttribute("refferPage", refferPage);
+		request.setAttribute("referer", refererPage);
 		
 		
 		

@@ -146,7 +146,9 @@ public class MemberDao {
 		OpMember member = null;
 		PreparedStatement pstmt = null;
 		
-		String sql = "select * from opmember where uemail=? and pw=?";
+		String sql = "select * from opmember where uemail=? and upw=?";
+		
+		System.out.println(uid + " : " + pw);
 		
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, uid); 

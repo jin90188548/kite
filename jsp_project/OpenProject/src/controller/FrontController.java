@@ -16,6 +16,8 @@ import service.EditMemberServiceImpl;
 import service.IdChkMemberServiceImpl;
 import service.IndexMemberServiceImpl;
 import service.LIstMemberServiceImpl;
+import service.LoginFormMemberServiceImpl;
+import service.LoginMemberServiceImpl;
 import service.MemberService;
 import service.RegAjaxMemberServiceImpl;
 import service.RegFormMemberServiceImpl;
@@ -57,8 +59,8 @@ public class FrontController extends HttpServlet {
 		uriMap.put("/member/delete", new DeleteMemberServiceImpl());
 		
 		//회원 로그인
-		//uriMap.put("/login/loginForm", new LoginFormMemberServiceImpl());
-		//uriMap.put("/login/login", new LoginMemberServiceImpl());
+		uriMap.put("/login/loginForm", new LoginFormMemberServiceImpl());
+		uriMap.put("/login/login", new LoginMemberServiceImpl());
 		
 		//회원 마이페이지 
 		//uriMap.put("/users/mypage", new MyPageMemberServiceImpl());
