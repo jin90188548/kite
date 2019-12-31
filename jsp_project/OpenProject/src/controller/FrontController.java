@@ -15,6 +15,7 @@ import service.EditFormMemberService;
 import service.EditMemberServiceImpl;
 import service.IdChkMemberServiceImpl;
 import service.IndexMemberServiceImpl;
+import service.KakaoLoginMemberServiceImpl;
 import service.LIstMemberServiceImpl;
 import service.LoginFormMemberServiceImpl;
 import service.LoginMemberServiceImpl;
