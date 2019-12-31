@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
+<title>Login Demo - Kakao JavaScript SDK</title>
+
+
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+</head>
+<body>
+	<a id="btn"></a>
+	<a href="http://developers.kakao.com/logout"></a>
+	<script type='text/javascript'>
+  //<![CDATA[
+    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('a2db6668ca4369582bb65eff2ecc65f1');
+    // 카카오 로그인 버튼을 생성합니다.
+    Kakao.Auth.createLoginButton({
+      container: '#btn',
+      size: 'large',
+      success: function(authObj) {
+        alert(JSON.stringify(authObj));
+        
+        Kakao.API.request({
+        	
+        	url : '/v2/user/me',
+        	success : function(res){
+        		alert(JSON.stringify(res));
+        		
+        		alert(res.kakao_account.profile.nickname);
+        		alert(res.kakao_account.profile.thumbnail_image_url);
+        		alert(res.kakao_account.profile.profile_image_url);
+        		alert(res.kakao_account.birthday);
+        		alert(res.kakao_account.gender);
+        		alert(res.kakao_account.age_range);
+        	}
+        	
+        });
+      },
+      fail: function(err) {
+         alert(JSON.stringify(err));
+      }
+    });
+  //]]>
+</script>
+
+</body>
+</html>
