@@ -9,8 +9,21 @@
 		<ul id="nav">
 			<li><a href="<c:url value="/"/>">홈</a></li>
 			<li><a href="<c:url value="/member/list"/>">회원 리스트</a></li>
-			<li><a href="<c:url value="/member/regForm"/>">회원 가입</a></li>
+			<li><a href="<c:url value="/member/regForm"/>">회원 가입</a></li>			
+			<c:if test="${loginInfo eq null}">
 			<li><a href="<c:url value="/login/loginForm"/>">로그인</a></li>
-			<li><a href="<c:url value="/mypage/mypage"/>">마이페이지</a></li>
+			</c:if>
+			<li><a href="<c:url value="/users/mypage"/>">마이페이지</a></li>
+			<c:if test="${loginInfo ne null}">
+			<li><a href="<c:url value="/login/logout"/>">로그아웃</a></li>
+			</c:if>
+			
 		</ul>
-	</div>
+	</div>	
+	
+	
+	
+	
+	
+	
+	

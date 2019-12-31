@@ -18,11 +18,26 @@
 		margin : 0;
 		padding : 0;
 	}
+	
+	#nav {
+		overflow: hidden;
+		list-style: none;
+		margin : 10px 0;
+		border-top : 1px solid #999;
+		border-bottom : 1px solid #999;
+	}
+	#nav>li {
+		float : left;
+		padding : 3px 30px;
+	}
+	
+	
 
 </style>
 </head>
 <body>
 
+<%@ include file="/WEB-INF/views/frame/header.jsp" %>
 	
 	
 	<c:if test="${loginInfo ne null}">
@@ -38,7 +53,7 @@
 	<c:if test="${loginInfo eq null}">
 		<script>
 			alert('로그인이 필요한 서비스 입니다. 확인해주세요.');
-			location.href= 'loginForm';
+			location.href= '../login/loginForm';
 		</script>
 
 	</c:if>
