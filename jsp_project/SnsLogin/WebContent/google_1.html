@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!--CDN 방식으로 jQuery 라이브러리를 로드-->
+<script src="https://code.jquery.com/jquery-1.12.4.js"
+	integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+	crossorigin="anonymous"></script>
+<style>
+
+#info, #logout {
+	display: none;
+}
+
+</style>
+</head>
+<body>
+	<a href="google_2.html">다른 페이지</a>
+	<a href="javascript:signInGoogle();" id="login">로그인</a>
+	<a href="javascript:userInfoGoogle();" id="info">상태확인</a>
+	<a href="javascript:signOutGoogle();" id="logout">로그아웃</a>
+	
+
+
+	<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+	<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+
+	<!-- Add Firebase products that you want to use -->
+	<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+	<!-- <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script> -->
+
+	<script>
+		// Your web app's Firebase configuration
+		var firebaseConfig = {
+			apiKey : "AIzaSyDT1GQ_Jvmgkr-vNI8Y-D5b1il7tR96ADs",
+			authDomain : "kite-iot.firebaseapp.com",
+			databaseURL : "https://kite-iot.firebaseio.com",
+			projectId : "kite-iot",
+			storageBucket : "kite-iot.appspot.com",
+			messagingSenderId : "147325261234",
+			appId : "1:147325261234:web:edb8b17b8683e3390bc0ab",
+			measurementId : "G-CQ38V0G3Z0"
+		};
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+
+		// google
+		var provider = new firebase.auth.GoogleAuthProvider();
+
+		provider.setCustomParameters({
+			'login_hint' : 'user@example.com'
+		});
+		
+		
+		// 사용자의 로그인 여부 확인 : 사용자 정보를 출력
+		function userInfoGoogle(){
+			
+			firebase.auth().onAuthStateChanged(function(user) {
+				  if (user) {
+				    // User is signed in.
+				    var displayName = user.displayName;
+				    var email = user.email;
+				    var emailVerified = user.emailVerified;
+				    var photoURL = user.photoURL;
+				    var isAnonymous = user.isAnonymous;
+				    var uid = user.uid;
+				    var providerData = user.providerData;
+				    
+				    alert(displayName + ' : ' + email);
+				    
+				    
+					  $('#login').css('display', 'none');
+					  $('#logout').css('display', 'block');
+					  $('#info').css('display', 'block');
+				    
+				    // ...
+				  } else {
+				    //alert('로그인이 필요합니다.');
+				    //location.href='google_1.html';
+				  }
+				});
+			
+		}
+		
+		
+		// 로그아웃
+		function signOutGoogle() {
+			firebase.auth().signOut().then(function() {
+				
+
+				  $('#login').css('display', 'block');
+				  $('#logout').css('display', 'none');
+				  $('#info').css('display', 'none');
+				
+				  alert('정상적으로 로그아웃 되었습니다.');
+				}).catch(function(error) {
+				  // An error happened.
+				});
+		}
+		
+		// 로그인 popup
+		function signInGoogle() {
+			
+			firebase.auth().signInWithPopup(provider).then(function(result) {
+				  // This gives you a Google Access Token. 
+				  // You can use it to access the Google API.
+				  var token = result.credential.accessToken;
+				  // The signed-in user info.
+				  var user = result.user;
+				  
+				  alert(JSON.stringify(user));
+				  
+				  $('#login').css('display', 'none');
+				  $('#logout').css('display', 'block');
+				  $('#info').css('display', 'block');
+				  
+				  // ...
+				}).catch(function(error) {
+				  // Handle Errors here.
+				  var errorCode = error.code;
+				  var errorMessage = error.message;
+				  // The email of the user's account used.
+				  var email = error.email;
+				  // The firebase.auth.AuthCredential type that was used.
+				  var credential = error.credential;
+				  // ...
+				});
+			
+		}
+		
+		$(document).ready(function(){
+			
+			userInfoGoogle();
+			
+		});
+		
+		
+		
+	</script>
+
+
+
+
+
+
+</body>
+</html>

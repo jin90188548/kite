@@ -19,8 +19,8 @@
 
 </head>
 <body>
-	<a id="btn_login" href="javascript:logInWithKakao();"><img
-		src="images/login_btn.png"></a>
+	<!-- <a id="btn_login" href="javascript:logInWithKakao();"><img
+		src="images/login_btn.png"></a> -->
 	
 
 	<a href="javascript:statusWithKakao();" id="status">로그인상태정보</a>
@@ -29,6 +29,16 @@
 	<!-- <a id="btn_logout1" href="http://developers.kakao.com/logout">logout</a> -->
 
 
+
+	<script>
+		
+		$(document).ready(function(){
+			
+			statusWithKakao();
+			
+		});
+	
+	</script>
 
 
 
@@ -83,17 +93,24 @@
 				alert(JSON.stringify(statusObj));
 
 				if (statusObj.status == 'connected') {
+					
+					$('#btn_logout').css('display', 'block');
+					$('#status').css('display', 'block');
+					$('#info').css('display', 'block');
+					
 					alert('로그인 상태입니다.');
+					
 				} else if (statusObj.status == 'not_connected') {
 					alert('로그인이 필요합니다.');
-					logInWithKakao();
+					//logInWithKakao();
+					location.href='kakao_2.html';
 				}
 
 			});
 
 		}
 
-		function logInWithKakao() {
+		/* function logInWithKakao() {
 
 			Kakao.Auth.login({
 				success : function(obj) {
@@ -109,7 +126,7 @@
 				}
 			});
 
-		}
+		} */
 
 		//]]>
 	</script>
