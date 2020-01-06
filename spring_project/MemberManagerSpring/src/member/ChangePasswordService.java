@@ -5,11 +5,19 @@ public class ChangePasswordService {
 	//private MemberDao memberDao = new MemberDao();
 	
 	private MemberDao memberDao;
-	
-	public ChangePasswordService(MemberDao dao) {
-		memberDao = dao;
+
+	public void setMemberDao(MemberDao memberDao) {
+		this.memberDao = memberDao;
 	}
 	
+	
+//	public ChangePasswordService(MemberDao dao) {
+//		memberDao = dao;
+//	}
+	
+
+
+
 	public void changePassword(
 			String email, 
 			String oldPassword, 

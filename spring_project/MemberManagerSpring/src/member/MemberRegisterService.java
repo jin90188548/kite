@@ -6,9 +6,13 @@ public class MemberRegisterService {
 	
 	private MemberDao memberDao;
 	
-	public MemberRegisterService(MemberDao memberDao) {
+	public void setMemberDao(MemberDao memberDao) {
 		this.memberDao = memberDao;
 	}
+	
+//	public MemberRegisterService(MemberDao memberDao) {
+//		this.memberDao = memberDao;
+//	}
 	
 	public void regist(RegisterRequest request) throws AleadyExistingMemberException {
 		
