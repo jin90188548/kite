@@ -22,6 +22,7 @@
 	
 	<ul> 
 		<li><a href="<c:url value="/index" />">/index</a></li>
+		<li><a href="<c:url value="/login/login" />">/login/login</a></li>
 	</ul>
 	
 	
