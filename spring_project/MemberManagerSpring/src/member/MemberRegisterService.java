@@ -2,10 +2,17 @@ package member;
 
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+//@Component(value = "registService")
+@Service(value = "registService")
 public class MemberRegisterService {
 	
 	private MemberDao memberDao;
 	
+	@Autowired
 	public void setMemberDao(MemberDao memberDao) {
 		this.memberDao = memberDao;
 	}
