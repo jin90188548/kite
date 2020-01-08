@@ -7,20 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<h1>로그인 </h1>
-
-${login}
-
-
-
-
-
-
-
-
+	<h1>회원 정보</h1>
+	<h3>${userInfo}</h3>
 </body>
 </html>
-
-
-

@@ -23,6 +23,13 @@
 	<ul> 
 		<li><a href="<c:url value="/index" />">/index</a></li>
 		<li><a href="<c:url value="/login/login" />">/login/login</a></li>
+		<li><a href="<c:url value="/order/order" />">/order/order</a></li>
+		<li><a href="<c:url value="/cookie/make" />">/cookie/make</a></li>
+		<li><a href="<c:url value="/cookie/view" />">/cookie/view</a></li>
+		<li><a href="<c:url value="/member/list" />">/member/list</a></li>
+		<li><a href="<c:url value="/member/search" />">/member/search</a></li>
+		<li><a href="<c:url value="/member/view/cool" />">/member/view/cool</a></li>
+		<li><a href="<c:url value="/member/view/hot" />">/member/view/hot</a></li>
 	</ul>
 	
 	

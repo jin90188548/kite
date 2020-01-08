@@ -7,20 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<h1>로그인 </h1>
-
-${login}
-
-
-
-
-
-
-
-
+	<h1>Cookie 정보 확인</h1>
+	<h3>${cUid}</h3>
+	
+	<h3>${cookie.uid.name}=${cookie.uid.value}</h3>
 </body>
 </html>
-
-
-
