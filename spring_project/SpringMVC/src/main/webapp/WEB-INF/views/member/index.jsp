@@ -31,6 +31,7 @@
 		<li><a href="<c:url value="/member/view/cool" />">/member/view/cool</a></li>
 		<li><a href="<c:url value="/member/view/hot" />">/member/view/hot</a></li>
 		<li><a href="<c:url value="/fileupload/form" />">/fileupload/form</a></li>
+		<li><a href="<c:url value="/uploadfile/test_droid.jpg" />">/uploadfile/test_droid.jpg</a></li>
 	</ul>
 	
 	

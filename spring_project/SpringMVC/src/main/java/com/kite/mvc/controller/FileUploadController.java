@@ -1,5 +1,10 @@
 package com.kite.mvc.controller;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +27,13 @@ public class FileUploadController {
 	public String submit1(
 			@RequestParam("sno") String sno,
 			@RequestParam("report") MultipartFile reportFile,
-			Model model
+			Model model,
+			HttpServletRequest request
 			) {
+		
+		String dir = "/uploadfile";
+		String path = request.getSession().getServletContext().getRealPath(dir);
+		System.out.println(path);
 		
 		System.out.println("학번 : " + sno);
 		System.out.println("리포트 : " + reportFile.getOriginalFilename() + "("+
@@ -31,6 +41,28 @@ public class FileUploadController {
 		
 		model.addAttribute("report", "리포트 : " + reportFile.getOriginalFilename() + "("+
 					reportFile.getSize()+")");
+		
+		
+		if(!reportFile.isEmpty()) {
+			
+			File file = new File(path, sno+"_"+reportFile.getOriginalFilename());
+			
+			try {
+				reportFile.transferTo(file);
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		
+		
+		
+		
 		
 		return "fileupload/upload";
 	}
