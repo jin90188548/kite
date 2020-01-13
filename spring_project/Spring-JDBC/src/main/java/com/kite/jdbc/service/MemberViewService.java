@@ -12,9 +12,12 @@ public class MemberViewService {
 	@Autowired
 	MemberDao dao;
 
-	public Member getMember(String email) {
-		
+	public Member getMember(String email) {		
 		return dao.getMemberByEmail(email);
+	}
+	
+	public Member getMember(int id) {
+		return dao.MembergetMemberById(id);
 	}
 	
 	

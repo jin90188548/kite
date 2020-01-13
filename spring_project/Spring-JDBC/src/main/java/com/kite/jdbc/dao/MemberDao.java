@@ -1,15 +1,13 @@
 package com.kite.jdbc.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kite.jdbc.domain.Member;
+import com.kite.jdbc.domain.RequestMeberReg;
 
 @Repository
 public class MemberDao implements Dao {
@@ -29,20 +27,39 @@ public class MemberDao implements Dao {
 
 	}
 
-	public Member getMemberByEmail(String email) {
-		
+	public Member getMemberByEmail(String email) {		
 		List<Member> members = template.query(
 				"select * from project.member where email=?", 
 				new MemberRowMapperImpl(), 
-				email);
-		
+				email);		
 		return members.isEmpty() ? null: members.get(0);
 	}
+	
+	public Member MembergetMemberById(Integer id) {
+		
+		return template.queryForObject(
+				"select * from project.member where id=?", 
+				new MemberRowMapperImpl(), 
+				id);
+	}
+	
+	
+	
+	
 
 	public int getMemberCount() {		
 		return template.queryForObject(
 				"select count(*) from project.member", 
 				Integer.class);
+	}
+
+	public int insertMember(RequestMeberReg request) {
+		String sql = "INSERT INTO project.member (EMAIL,PASSWORD,NAME,REGDATE) "
+				   + " VALUES (?, ?, ?, now())";
+		return template.update(sql, 
+				request.getEmail(),
+				request.getPassword(),
+				request.getName());
 	}
 
 	
