@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.kite.jdbc">
+	<logger name="com.kite.jdbc.controller">
 		<level value="info" />
 	</logger>
 	
@@ -37,5 +37,18 @@
 		<priority value="warn" />
 		<appender-ref ref="console" />
 	</root>
+	
+	<logger name="org.springframework.jdbc">
+		<level value="all"/>
+	</logger>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 </log4j:configuration>

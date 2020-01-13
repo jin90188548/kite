@@ -13,8 +13,8 @@ public class MemberRegService {
 	MemberDao dao;
 	
 	public int regMember(RequestMeberReg request) {
-		//return dao.insertMember(request);
-		return dao.insert(request);
+		return dao.insertMember(request);
+		//return dao.insert(request);
 	}
 
 }
