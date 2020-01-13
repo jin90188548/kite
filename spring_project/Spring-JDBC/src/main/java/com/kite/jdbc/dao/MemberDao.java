@@ -1,9 +1,15 @@
 package com.kite.jdbc.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.kite.jdbc.domain.Member;
@@ -61,6 +67,32 @@ public class MemberDao implements Dao {
 				request.getPassword(),
 				request.getName());
 	}
+	
+	public int insert(RequestMeberReg request) {
+		
+		KeyHolder keyHolder = new GeneratedKeyHolder();		
+		template.update(
+				new PreparedStatementCreator() {					
+					@Override
+					public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+						String sql = "INSERT INTO project.member (EMAIL,PASSWORD,NAME,REGDATE) "
+								   + " VALUES (?, ?, ?, now())";
+						PreparedStatement pstmt = con.prepareStatement(sql, new String[] {"id"});
+						pstmt.setString(1, request.getEmail());
+						pstmt.setString(2, request.getPassword());
+						pstmt.setString(3, request.getName());
+						return pstmt;
+					}
+				}, 
+				keyHolder);
+		
+		Number keyValue = keyHolder.getKey();
+		
+		return keyValue.intValue();
+		
+	}
+	
+	
 
 	
 	
