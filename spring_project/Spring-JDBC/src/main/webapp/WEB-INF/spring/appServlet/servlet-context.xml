@@ -27,7 +27,7 @@
 		id="dataSource"
 		class="org.apache.commons.dbcp2.BasicDataSource"
 		p:driverClassName="com.mysql.jdbc.Driver"
-		p:url="jdbc:mysql://localhost:3306/project"
+		p:url="jdbc:mysql://localhost:3306/project?characterEncoding=UTF-8&amp;serverTimezone=UTC"		
 		p:username="kite"
 		p:password="kite1111"
 	/>
