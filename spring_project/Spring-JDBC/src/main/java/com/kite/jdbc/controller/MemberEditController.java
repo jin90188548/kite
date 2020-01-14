@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kite.jdbc.domain.Member;
+import com.kite.jdbc.service.MemberEditService;
 import com.kite.jdbc.service.MemberViewService;
 
 @Controller
@@ -16,6 +17,9 @@ public class MemberEditController {
 	
 	@Autowired
 	MemberViewService viewService;
+	
+	@Autowired
+	MemberEditService editService;
 	
 	
 	@RequestMapping(method = RequestMethod.GET)
@@ -29,5 +33,23 @@ public class MemberEditController {
 		
 		return "member/editForm";
 	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public String edit(Member member, Model model) {
+		
+		model.addAttribute("result", editService.editMember(member));
+		
+		return "member/edit";
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

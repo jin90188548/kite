@@ -36,6 +36,15 @@ public class MemberMybatisDao implements Dao {
 	public int insertMember(RequestMeberReg request) {
 		return session.insert(ns+".insertMember", request);
 	}
+
+	public int editMember(Member member) {		
+		return session.update(ns+".updateMember", member);
+	}
+	
+	// 회원 정보 삭제
+	public int deleteMember(int id) {
+		return session.delete(ns+".deleteMember", id);
+	}
 	
 	
 	

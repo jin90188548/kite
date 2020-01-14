@@ -4,17 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kite.jdbc.dao.MemberMybatisDao;
-import com.kite.jdbc.domain.Member;
 
 @Service
-public class MemberEditService {
+public class MemberDeleteService {
 	
 	@Autowired
 	MemberMybatisDao mDao;
-	
-	public int editMember(Member member) {
-		
-		return mDao.editMember(member);
-	}
 
+	public int deleteMember(int id) {
+		return mDao.deleteMember(id);
+	}
+	
+	
+	
+	
+	
 }
