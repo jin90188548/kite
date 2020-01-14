@@ -1,6 +1,7 @@
 package com.kite.jdbc.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,10 @@ public class MemberMybatisDao implements Dao {
 	// 회원 정보 삭제
 	public int deleteMember(int id) {
 		return session.delete(ns+".deleteMember", id);
+	}
+
+	public List<Member> searchList(Map<String, String> map) {		
+		return session.selectList(ns+".list", map);
 	}
 	
 	

@@ -1,6 +1,8 @@
 package com.kite.jdbc.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +32,15 @@ public class MemberListService {
 		List<Member> members = mDao.selectMemberList();
 		
 		return members;
+	}
+
+	public List<Member> serchList(String stype, String keyword) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("stype", stype);
+		map.put("keyword", keyword);
+		
+		return mDao.searchList(map);
 	}
 	
 	

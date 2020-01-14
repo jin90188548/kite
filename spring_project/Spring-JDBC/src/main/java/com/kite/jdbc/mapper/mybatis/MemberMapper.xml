@@ -39,6 +39,36 @@
 	</select>
 	
 	
+	<select id="list" 
+			parameterType="map"
+			resultType="com.kite.jdbc.domain.Member" >
+				
+		select * from project.member
+		
+		<where>
+			
+			<if test="stype == 'both'">
+				email like CONCAT('%', #{keyword} ,'%')
+				or 
+				name like CONCAT('%', #{keyword} ,'%')
+			</if>	
+						
+			<if test="stype == 'email'">
+				email like CONCAT('%', #{keyword} ,'%')
+			</if>	
+						
+			<if test="stype == 'name'">
+				name like CONCAT('%', #{keyword} ,'%')
+			</if>	
+					
+			
+		</where>
+		
+		order by email desc
+				
+	</select>
+	
+	
 	<!-- 회원 정보 삽입 -->
 	<insert id="insertMember" 
 			parameterType="com.kite.jdbc.domain.RequestMeberReg" >
