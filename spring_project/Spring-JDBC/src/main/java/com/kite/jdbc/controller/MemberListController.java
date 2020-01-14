@@ -45,6 +45,21 @@ public class MemberListController {
 		return "member/list";
 	}
 	
+
+	@RequestMapping("/member/list3")
+	public String  list3(Model model) {
+
+		List<Member> members = service.getList2();
+		
+		for (Member member : members) {
+			System.out.println(member);
+		}
+		
+		model.addAttribute("members", members);
+		
+		return "member/list";
+	}
+	
 	
 	
 	
