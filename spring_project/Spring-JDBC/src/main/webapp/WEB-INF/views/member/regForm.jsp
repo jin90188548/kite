@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<h1>회원가입</h1>
+	<h1>회원 정보수정</h1>
 	<form method="post">
 		email <input type="email" name="email"> <br> 
 		이름 <input type="text" name="name">		<br> 

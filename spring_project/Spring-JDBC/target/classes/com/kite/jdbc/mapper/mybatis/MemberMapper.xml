@@ -5,6 +5,32 @@
 
 <mapper namespace="com.kite.jdbc.mapper.mybatis.MemberMapper">
 
+	
+	<!-- select의 결과를 매핑하는 resultMap 설정 -->
+	<resultMap id="resultMember"
+				type="com.kite.jdbc.domain.Member">
+		<id property="id" column="id" />
+		<result property="email" column="email"  />	
+		<result property="password" column="password"/>	
+		<result property="name" column="name"/>
+		<result property="regdate" column="regdate"/>		
+	</resultMap>
+	
+	<!-- 이메일로 검색 -->
+	<select id="selectByEmail" resultMap="resultMember">
+	
+		select * from project.member where email=#{email}
+		
+	</select>
+	
+	<!-- ID로 검색 -->
+	<select id="selectById" resultMap="resultMember">
+	
+		select * from project.member where id=#{id}
+		
+	</select>
+
+
 	<select id="selectList" 
 			resultType="com.kite.jdbc.domain.Member" >
 	
