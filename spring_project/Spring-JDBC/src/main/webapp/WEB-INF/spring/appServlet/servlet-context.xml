@@ -39,6 +39,21 @@
 		p:dataSource-ref="dataSource"
 	/>
 	
+	<!-- SqlSessionFactoryBean 설정 : MyBatis 설정 -->
+	<beans:bean id="sqlSessionFactory"
+				class="org.mybatis.spring.SqlSessionFactoryBean"
+	>
+		<beans:property name="dataSource" ref="dataSource"/>
+		<beans:property name="mapperLocations" 
+		value="classpath:com/kite/jdbc/mapper/mybatis/*.xml"/>
+	</beans:bean>
+	
+	<!-- SqlSessionTemplate 빈 등록 -->
+	<beans:bean id="sqlSession"
+				class="org.mybatis.spring.SqlSessionTemplate">
+		<beans:constructor-arg ref="sqlSessionFactory" />
+	</beans:bean>
+	
 	
 	
 	

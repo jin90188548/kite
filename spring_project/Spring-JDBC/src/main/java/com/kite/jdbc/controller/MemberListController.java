@@ -31,6 +31,19 @@ public class MemberListController {
 		//     /WEB-INF/views/member/list.jsp
 	}
 	
+	@RequestMapping("/member/list2")
+	public String  list(Model model) {
+
+		List<Member> members = service.getList();
+		
+		for (Member member : members) {
+			System.out.println(member);
+		}
+		
+		model.addAttribute("members", members);
+		
+		return "member/list";
+	}
 	
 	
 	

@@ -24,7 +24,7 @@ public class MemberDao implements Dao {
 	public List<Member> getMemberList() {
 
 		List<Member> members = null;
-		String sql = "select * from project.member";
+		String sql = "select * from project.member order by email";
 		members = template.query(sql, new MemberRowMapperImpl());
 		return members;
 
