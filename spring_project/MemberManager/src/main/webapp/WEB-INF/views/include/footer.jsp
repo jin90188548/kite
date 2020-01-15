@@ -12,10 +12,10 @@
 				|| document
 						.write('<script src="js/assets/vendor/jquery-slim.min.js"><\/script>')
 	</script>
-	<script src="js/assets/vendor/popper.min.js"></script>
-	<script src="js/bootstrap/bootstrap.min.js"></script>
-	<script src="js/assets/js/vendor/holder.min.js"></script>
-	<script src="js/bootstrap/offcanvas.js"></script>
+	<script src="<c:url value="/js/assets/vendor/popper.min.js"/>"></script>
+	<script src="<c:url value="/js/bootstrap/bootstrap.min.js"/>"></script>
+	<script src="<c:url value="/js/assets/js/vendor/holder.min.js"/>"></script>
+	<script src="<c:url value="/js/bootstrap/offcanvas.js"/>"></script>
 	
 	
 	

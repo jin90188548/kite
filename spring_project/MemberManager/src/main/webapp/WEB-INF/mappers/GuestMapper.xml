@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.kite.mm.guest.dao.GuestDao">
+
+	<insert id="insertArticle"
+			parameterType="com.kite.mm.guest.domain.WriteRequest"
+			useGeneratedKeys="true" 
+			keyProperty="idx"
+			>
+	
+		insert into GUESTBOOK (memberid, title, content) 
+		values (#{writer}, #{title}, #{content})
+	
+	</insert>
+
+</mapper>

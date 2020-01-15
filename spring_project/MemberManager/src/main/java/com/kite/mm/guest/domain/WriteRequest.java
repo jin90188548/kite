@@ -2,9 +2,20 @@ package com.kite.mm.guest.domain;
 
 public class WriteRequest {
 
+	private int idx;
 	private int writer;
 	private String title;
 	private String content;
+
+	
+	
+	public int getIdx() {
+		return idx;
+	}
+
+	public void setIdx(int idx) {
+		this.idx = idx;
+	}
 
 	public int getWriter() {
 		return writer;
@@ -32,7 +43,8 @@ public class WriteRequest {
 
 	@Override
 	public String toString() {
-		return "WriteRequest [writer=" + writer + ", title=" + title + ", content=" + content + "]";
+		return "WriteRequest [idx=" + idx + ", writer=" + writer + ", title=" + title + ", content=" + content + "]";
 	}
 
+	
 }
