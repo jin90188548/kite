@@ -5,7 +5,8 @@ create table project.OPMEMBER (
     upw varchar(20) not null,
     gender char(1) check ( gender='m' or gender='w' ) not null,
     byear int,
-    uphoto varchar(200)
+    uphoto varchar(200),
+    regdate datetime
 );
 -- sysdate
-INSERT INTO `project`.`member` (`EMAIL`,`PASSWORD`,`NAME`,`REGDATE`) VALUES ('test1@test1', '2222', 'tester1', now());
+
