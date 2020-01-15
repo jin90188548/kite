@@ -5,73 +5,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-
-<title>Index</title>
-
-<link rel="stylesheet" href="<c:url value="/css/default.css"/>">
-
-<!-- Bootstrap core CSS -->
-<link href="<c:url value="/css/bootstrap/bootstrap.min.css"/>"
-	rel="stylesheet">
-<!-- Custom styles for this template -->
-<link href="<c:url value="/css/bootstrap/offcanvas.css"/>"
-	rel="stylesheet">
-
-<style>
-</style>
-
-
-<script>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
 	
-</script>
+	<title>Index</title>
+	
+	
+	<!-- 기본 CSS 처리 시작 -->
+	<%@ include file="/WEB-INF/views/include/basic.jsp" %>	
+	<!-- 기본 CSS 처리 끝 -->
+	
+	<script>
+		
+	</script>
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-	
-		<a class="navbar-brand mr-auto mr-lg-0" href="<c:url value="/"/>">MemberManager</a>
-		
-		
-		<button class="navbar-toggler p-0 border-0" type="button"
-			data-toggle="offcanvas">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-
-		<div class="navbar-collapse offcanvas-collapse"
-			id="navbarsExampleDefault">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item "><a class="nav-link" href="#">HOME
-						<span class="sr-only">(current)</span>
-				</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">회원가입</a>	</li>
-				<li class="nav-item"><a class="nav-link" href="#">회원로그인</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">회원로그아웃</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">회원리스트</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">방명록</a></li>
-				<!-- <li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="https://example.com"
-					id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false">Settings</a>
-					<div class="dropdown-menu" aria-labelledby="dropdown01">
-						<a class="dropdown-item" href="#">Action</a> 
-						<a class="dropdown-item" href="#">Another action</a> 
-						<a class="dropdown-item" href="#">Something else here</a>
-					</div>
-				</li> -->
-			</ul>
-			
-			<!-- <form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="text" placeholder="Search"
-					aria-label="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-			</form> -->
-		</div>
-	</nav>
+	<!-- 해더 시작 -->
+	<%@ include file="/WEB-INF/views/include/header.jsp" %>
+	<!-- 해더 끝 -->
 
 
 	<!-- 메인 컨텐트 시작 -->
@@ -159,22 +114,17 @@
 
 
 
-
-
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script>
-		window.jQuery
-				|| document
-						.write('<script src="js/assets/vendor/jquery-slim.min.js"><\/script>')
-	</script>
-	<script src="js/assets/vendor/popper.min.js"></script>
-	<script src="js/bootstrap/bootstrap.min.js"></script>
-	<script src="js/assets/js/vendor/holder.min.js"></script>
-	<script src="js/bootstrap/offcanvas.js"></script>
+	<!-- 푸터 시작 -->
+	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
+	<!-- 푸터 끝 -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </body>
 </html>
