@@ -5,6 +5,31 @@
 
 <mapper namespace="com.kite.mm.guest.dao.GuestDao">
 
+	<resultMap type="com.kite.mm.guest.domain.GuestArticleVo" id="guestArticle">
+	
+		<id property="idx" column="idx"/>
+		<result property="writer" column="memberid"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="regdate" column="regdate"/>
+				
+	</resultMap>
+	
+	<select id="selectCount" resultType="int">
+	
+		select count(*) from GUESTBOOK
+	
+	</select>
+	
+	
+	
+
+	<select id="selectArticleList" resultMap="guestArticle">
+	
+		select * from GUESTBOOK  limit #{param1}, #{param2}
+	
+	</select>
+
 	<insert id="insertArticle"
 			parameterType="com.kite.mm.guest.domain.WriteRequest"
 			useGeneratedKeys="true" 

@@ -19,9 +19,11 @@ public class GuestListService {
 	private GuestDao dao;
 	
 	// 한 페이지 표현될 게시글의 개수
-	private final int COUNT_PER_PAGE = 3;  
+	private final int COUNT_PER_PAGE = 4;  
 	
 	public GuestListView getListView(int pageNo) {
+		
+		dao = template.getMapper(GuestDao.class);
 		
 		// 시작 게시글의 위치 startRow
 		int startRow = (pageNo-1)*COUNT_PER_PAGE;

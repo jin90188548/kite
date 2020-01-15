@@ -27,7 +27,7 @@
 					aria-expanded="false">방명록</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown01">
 						<a class="dropdown-item" href="<c:url value="/guest/write"/>">방명록 작성</a> 
-						<a class="dropdown-item" href="#">벙명록 리스트 보기</a>
+						<a class="dropdown-item" href="<c:url value="/guest/list"/>">벙명록 리스트 보기</a>
 					</div>
 				</li>
 			</ul>

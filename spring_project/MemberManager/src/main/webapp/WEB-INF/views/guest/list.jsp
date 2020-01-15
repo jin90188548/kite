@@ -41,6 +41,7 @@
 
       <div class="my-3 p-3 bg-white rounded box-shadow">
         <h6 class="border-bottom border-gray pb-2 mb-0">방명록</h6>
+        <%-- ${listView} --%>
         <table class="table">
         	<tr>
         		<th>no</th>
@@ -50,52 +51,43 @@
         	</tr>
         	
         	<!-- 리스트 시작 -->
+        	<c:forEach items="${listView.list}" var="article" >
         	<tr>
-        		<td>no</td>
-        		<td>제목</td>
-        		<td>작성자</td>
-        		<td>작성시간</td>
+        		<td>${article.idx}</td>
+        		<td>${article.title}</td>
+        		<td>${article.writer}</td>
+        		<td>${article.regdate}</td>
         	</tr>
+        	
+        	</c:forEach>
         	<!-- 리스트 끝 -->
         	
         </table>
+        
+        <div>
+        	<c:forEach begin="1" end="${listView.totalPageCount}" var="i">
+        	<a href="list?page=${i}">[${i}]</a> 
+        	</c:forEach>
+        </div>
       </div>
 
       <div class="my-3 p-3 bg-white rounded box-shadow">
         <h6 class="border-bottom border-gray pb-2 mb-0">방명록</h6>
+        
+        <c:forEach items="${listView.list}" var="article" >
         <div class="media text-muted pt-3">
-          <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
+          <!-- <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded"> -->
           <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
             <div class="d-flex justify-content-between align-items-center w-100">
-              <strong class="text-gray-dark">Full Name</strong>
-              <a href="#">Follow</a>
+              <strong class="text-gray-dark">${article.title}</strong>
+              <a href="#">${article.writer}</a>
             </div>
-            <span class="d-block">@username</span>
+            <span class="d-block">${article.content}</span>
           </div>
         </div>
-        <div class="media text-muted pt-3">
-          <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
-          <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-            <div class="d-flex justify-content-between align-items-center w-100">
-              <strong class="text-gray-dark">Full Name</strong>
-              <a href="#">Follow</a>
-            </div>
-            <span class="d-block">@username</span>
-          </div>
-        </div>
-        <div class="media text-muted pt-3">
-          <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
-          <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-            <div class="d-flex justify-content-between align-items-center w-100">
-              <strong class="text-gray-dark">Full Name</strong>
-              <a href="#">Follow</a>
-            </div>
-            <span class="d-block">@username</span>
-          </div>
-        </div>
-        <small class="d-block text-right mt-3">
-          <a href="#">All suggestions</a>
-        </small>
+        </c:forEach>
+        
+        
       </div>
     </main>
 

@@ -38,6 +38,39 @@ public class GuestListView {
 	
 	}
 
+	public List<GuestArticleVo> getList() {
+		return list;
+	}
+
+	public int getTotalArticleCount() {
+		return totalArticleCount;
+	}
+
+	public int getTotalPageCount() {
+		return totalPageCount;
+	}
+
+	public int getCurrentPageNo() {
+		return currentPageNo;
+	}
+
+	public int getStartRow() {
+		return startRow;
+	}
+
+	public int getCountPerPage() {
+		return countPerPage;
+	}
+
+	@Override
+	public String toString() {
+		return "GuestListView [list=" + list + ", totalArticleCount=" + totalArticleCount + ", totalPageCount="
+				+ totalPageCount + ", currentPageNo=" + currentPageNo + ", startRow=" + startRow + ", countPerPage="
+				+ countPerPage + "]";
+	}
+
+	
+	
 	
 	
 	
