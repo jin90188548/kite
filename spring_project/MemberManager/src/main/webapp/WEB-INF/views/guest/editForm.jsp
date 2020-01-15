@@ -41,27 +41,31 @@
       </div>
 
       <div class="my-3 p-3 bg-white rounded box-shadow">
-        <h6 class="border-bottom border-gray pb-2 mb-0">방명록 작성</h6>
+        <h6 class="border-bottom border-gray pb-2 mb-0">방명록 수정</h6>
         
         
         <div class=" text-muted pt-3">
           <form method="post">
-          
+          <input type="hidden" name="idx" value="${article.idx}">
           <div class="form-group">
           	<label for="writer">작성자</label>
-          	<input type="number"  class="form-control" id="writer" name="writer" required>
+          	<input type="number"  class="form-control" id="writer" name="writer" readonly
+          	value="${article.writer}" 
+          	>
           </div>
           
           <div class="form-group">
           	<label for="title">제목</label>
-          	<input type="text" class="form-control" id="title" name="title" required>          	
+          	<input type="text" class="form-control" id="title" name="title" required
+          		value="${article.title}"          	
+          	>          	
           </div>
           
           <div class="form-group">
           	<label for=""content"">내용</label>          	
-          	<textarea id="content" class="form-control" name="content" rows="5" cols="10" required></textarea>         	          	
+          	<textarea id="content" class="form-control" name="content" rows="5" cols="10" required>${article.content}</textarea>         	          	
           </div>
-          <input type="submit" value="작성" class="btn btn-primary">
+          <input type="submit" value="수정" class="btn btn-primary">
           </form>
         </div>
       </div>

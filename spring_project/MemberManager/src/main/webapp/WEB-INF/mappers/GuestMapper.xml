@@ -21,7 +21,9 @@
 	
 	</select>
 	
-	
+	<select id="selectGuestByIdx" resultMap="guestArticle">
+		select * from GUESTBOOK where idx=#{idx}
+	</select>
 	
 
 	<select id="selectArticleList" resultMap="guestArticle">
@@ -40,5 +42,21 @@
 		values (#{writer}, #{title}, #{content})
 	
 	</insert>
+	
+	<update id="editArticle" 
+			parameterType="com.kite.mm.guest.domain.WriteRequest">
+	
+	update GUESTBOOK 
+	set title=#{title}, content=#{content}, editdate=now()
+	where idx=#{idx}
+	
+	</update>
+	
+	
+	
+	
+	
+	
+	
 
 </mapper>
