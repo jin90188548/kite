@@ -8,5 +8,15 @@ create table project.OPMEMBER (
     uphoto varchar(200),
     regdate datetime
 );
+
+ALTER TABLE `project`.`guestbook` 
+ADD CONSTRAINT `gbook_fk`
+  FOREIGN KEY (`memberid`)
+  REFERENCES `project`.`opmember` (`idx`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+
+
 -- sysdate
 
