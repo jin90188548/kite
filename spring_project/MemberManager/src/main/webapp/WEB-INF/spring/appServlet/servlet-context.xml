@@ -23,6 +23,7 @@
 	<resources mapping="/images/**" location="/images/" />
 	<resources mapping="/css/**" location="/css/" />
 	<resources mapping="/js/**" location="/js/" />
+	<resources mapping="/uploadfile/**" location="/uploadfile/" />
 
 
 

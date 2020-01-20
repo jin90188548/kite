@@ -17,6 +17,8 @@ public interface GuestDao {
 	public GuestArticleVo selectGuestByIdx(int idx);
 	// idx 값으로 한개의 게시물의 데이터 수정
 	public int editArticle(WriteRequest request);
+	// idx로 게시물 삭제
+	public int deleteArticle(int idx);
 
 }
 

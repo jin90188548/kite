@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- interface의 full name을 namespace의 속성으로 사용 : 필수 -->
+<mapper namespace="com.kite.mm.member.dao.MemberDaoInterface">
+
+	<!-- select 결과 메핑을 위한 resultMap 설정 -->
+	<resultMap id="resultMemberInfo"
+		type="com.kite.mm.member.domain.OpMember">
+		<id property="idx" column="idx" />
+		<result property="uid" column="uemail" />
+		<result property="pw" column="upw" />
+		<result property="uname" column="uname" />
+		<result property="byear" column="byear" />
+		<result property="gender" column="gender" />
+		<result property="uphoto" column="uphoto" />
+		<result property="regDate" column="date" />
+	</resultMap>
+
+	<!-- 회원로그인 -->
+	<select id="selectMemberById" resultMap="resultMemberInfo">
+
+		select * from opmember where uemail=#{param1} and upw=#{param2}
+
+	</select>
+
+	<!-- 아이디 중복체크 -->
+	<select id="selectMemberById2" resultMap="resultMemberInfo">
+		select * from opmember
+		where uid=#{id}
+	</select>
+
+	<!-- 회원가입 -->
+	<insert id="insertMember"
+		parameterType="com.kite.mm.member.domain.OpMember">
+
+		insert into opmember (uemail, uname, upw, gender, byear, uphoto, regdate)
+		values
+		(#{uid},#{uname},#{pw},#{gender},#{byear},#{uphoto}, now())
+
+	</insert>
+
+	<!-- 회원 정보 수정을 위한 정보 획득 -->
+	<select id="selectMemberByIdx" resultMap="resultMemberInfo">
+		select * from opmember where idx=#{idx}
+	</select>
+
+	<!-- 회원정보수정 -->
+	<update id="memberUpdate"
+		parameterType="com.kite.mm.member.domain.OpMember">
+		update opmember 
+		set uname=#{uname}, upw=#{pw}, uphoto=#{uphoto}, byear=#{byear}, gender=#{gender} 
+		where idx=#{idx}
+	</update>
+
+	<!-- 회원정보 삭제 -->
+	<delete id="memberDelete">
+		delete from opmember where idx=#{idx}
+	</delete>
+
+	<!-- 회원 리스트의 개수 : 검색을 위해 동적쿼리 적용 -->
+	<select id="selectTotalCount"
+		parameterType="com.kite.mm.member.domain.SearchParam" resultType="int">
+
+		select count(*) from opmember
+
+		<where>
+
+			<if test="stype != null">
+				<if test="stype == 'both'">
+					uid LIKE CONCAT('%', #{keyword}, '%')
+					or uname LIKE
+					CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="stype == 'id'">
+					uid LIKE CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="stype == 'name'">
+					uname LIKE CONCAT('%', #{keyword}, '%')
+				</if>
+
+			</if>
+
+
+		</where>
+
+	</select>
+
+
+	<!-- 회원 리스트 : 검색을 위해 동적쿼리 적용 -->
+
+	<select id="selectList" parameterType="map"
+		resultMap="resultMemberInfo">
+
+		SELECT * FROM opmember
+
+		<where>
+
+			<if test="search != null">
+				<if test="search.stype == 'both'">
+					<include refid="whereId" />
+					<include refid="whereName" />
+					uid LIKE CONCAT('%', #{search.keyword}, '%') or uname LIKE CONCAT('%', 
+						#{search.keyword}, '%')
+				</if>
+				<if test="search.stype == 'id'">
+					<include refid="whereId" />
+					uid LIKE CONCAT('%', #{search.keyword}, '%')
+				</if>
+				<if test="search.stype == 'name'">
+					<include refid="whereName" />
+					uname LIKE CONCAT('%', #{search.keyword}, '%')
+				</if>
+			</if>
+
+		</where>
+
+		<!-- limit #{param1}, #{param2} -->
+		limit #{index}, #{count}
+	</select>
+
+
+	<!-- 전체 회원 리스트 구하기 -->
+	<select id="selectAllList" resultMap="resultMemberInfo">
+
+		select * from opmember order by uname
+
+	</select>
+
+
+
+		
+	<sql id="whereId">
+		or uid LIKE CONCAT('%', #{search.keyword}, '%')
+	</sql>
+		
+	<sql id="whereName">
+		or uname LIKE CONCAT('%', #{search.keyword}, '%')
+	</sql>
+	
+	
+
+
+
+
+
+
+</mapper>
+
+
+ 
+ 

@@ -52,6 +52,10 @@
 	
 	</update>
 	
+	<delete id="deleteArticle">
+		delete from guestbook where idx=#{idx}
+	</delete>
+	
 	
 	
 	
