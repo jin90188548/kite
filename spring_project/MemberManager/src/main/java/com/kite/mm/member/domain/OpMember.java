@@ -105,8 +105,8 @@ public class OpMember {
 		this.regdate = regdate;
 	}
 
-	public Object toLoginInfo() {
-		return new LoginInfo(uid, uname, uphoto, byear, gender, regdate);
+	public LoginInfo toLoginInfo() {
+		return new LoginInfo(idx, uid, uname, uphoto, byear, gender, regdate);
 	}
 
 	@Override

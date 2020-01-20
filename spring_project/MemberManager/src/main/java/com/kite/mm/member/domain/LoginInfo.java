@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class LoginInfo {
 
+	private int idx;
 	private String uid;
 	private String uname;
 	private String uphoto;
@@ -11,8 +12,9 @@ public class LoginInfo {
 	private String gender;
 	private Date regDate;
 
-	public LoginInfo(String uid, String uname, String uphoto, int byear, String gender, Date regDate) {
+	public LoginInfo(int idx, String uid, String uname, String uphoto, int byear, String gender, Date regDate) {
 		super();
+		this.idx = idx;
 		this.uid = uid;
 		this.uname = uname;
 		this.uphoto = uphoto;
@@ -24,6 +26,14 @@ public class LoginInfo {
 	public LoginInfo() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public int getIdx() {
+		return idx;
+	}
+
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
 
 	public String getUid() {
@@ -76,8 +86,9 @@ public class LoginInfo {
 
 	@Override
 	public String toString() {
-		return "LoginInfo [uid=" + uid + ", uname=" + uname + ", uphoto=" + uphoto + ", byear=" + byear + ", gender="
-				+ gender + ", regDate=" + regDate + "]";
+		return "LoginInfo [idx=" + idx + ", uid=" + uid + ", uname=" + uname + ", uphoto=" + uphoto + ", byear=" + byear
+				+ ", gender=" + gender + ", regDate=" + regDate + "]";
 	}
 
+	
 }

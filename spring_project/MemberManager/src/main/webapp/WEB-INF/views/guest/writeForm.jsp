@@ -56,7 +56,7 @@
           
           <div class="form-group">
           	<label for="writer">작성자</label>
-          	<input type="number"  class="form-control" id="writer" name="writer" required>
+          	<input type="number"  class="form-control" id="writer" name="writer" required value="${loginInfo.idx}">
           </div>
           
           <div class="form-group">

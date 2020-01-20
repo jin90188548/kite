@@ -103,16 +103,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				<if test="search.stype == 'both'">
 					<include refid="whereId" />
 					<include refid="whereName" />
-					uid LIKE CONCAT('%', #{search.keyword}, '%') or uname LIKE CONCAT('%', 
-						#{search.keyword}, '%')
+					<!-- uid LIKE CONCAT('%', #{search.keyword}, '%') or uname LIKE CONCAT('%', 
+						#{search.keyword}, '%') -->
 				</if>
 				<if test="search.stype == 'id'">
 					<include refid="whereId" />
-					uid LIKE CONCAT('%', #{search.keyword}, '%')
+					<!-- uid LIKE CONCAT('%', #{search.keyword}, '%') -->
 				</if>
 				<if test="search.stype == 'name'">
 					<include refid="whereName" />
-					uname LIKE CONCAT('%', #{search.keyword}, '%')
+					<!-- uname LIKE CONCAT('%', #{search.keyword}, '%') -->
 				</if>
 			</if>
 
