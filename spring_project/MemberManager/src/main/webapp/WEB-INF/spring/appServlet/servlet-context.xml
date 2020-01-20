@@ -49,7 +49,7 @@
 	<beans:bean id="dataSource"
 		class="org.apache.commons.dbcp2.BasicDataSource"
 		p:driverClassName="com.mysql.jdbc.Driver"
-		p:url="jdbc:mysql://localhost:3306/project?characterEncoding=UTF-8&amp;serverTimezone=UTC"
+		p:url="jdbc:mysql://aws-rds-mysql57.clnin3h9ajsh.ap-northeast-2.rds.amazonaws.com:3306/project?characterEncoding=UTF-8&amp;serverTimezone=UTC"
 		p:username="kite" p:password="kite1111" />
 
 	<!-- SqlSessionFactoryBean 설정 : MyBatis 설정 -->
