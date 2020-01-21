@@ -141,10 +141,9 @@ public class MemberListService implements MemberService {
 		return list;
 		
 	}
-	
 
-	
-	
+
+
 	
 	
 	
