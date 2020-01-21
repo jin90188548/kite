@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+<title>Offcanvas template for Bootstrap</title>
+
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="css/bootstrap/offcanvas.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+	<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+		<a class="navbar-brand mr-auto mr-lg-0" href="#">MemberManager</a>
+		<button class="navbar-toggler p-0 border-0" type="button"
+			data-toggle="offcanvas">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="navbar-collapse offcanvas-collapse"
+			id="navbarsExampleDefault">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" href="#">Dashboard
+						<span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Notifications</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Switch
+						account</a></li>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="https://example.com"
+					id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false">Settings</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown01">
+						<a class="dropdown-item" href="#">Action</a> <a
+							class="dropdown-item" href="#">Another action</a> <a
+							class="dropdown-item" href="#">Something else here</a>
+					</div></li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2" type="text" placeholder="Search"
+					aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			</form>
+		</div>
+	</nav>
+
+
+
+	<main role="main" class="container">
+		<div
+			class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
+			<div class="lh-100">
+				<h6 class="mb-0 text-white lh-100">회원 리스트</h6>
+				<small>Member List</small>
+			</div>
+		</div>
+
+		<div class="my-3 p-3 bg-white rounded box-shadow">
+			<h6 class="border-bottom border-gray pb-2 mb-0">회원리스트</h6>
+
+			<table class="table">
+				<tbody id="listbody">
+					<tr>
+						<th>no</th>
+						<th>ID(Email)</th>
+						<th>이름</th>
+						<th>비밀번호</th>
+						<th>생일</th>
+						<th>성별</th>
+						<th>사진</th>
+						<th>가입일</th>
+						<th>관리</th>
+					</tr>
+
+					<!-- 리스트 시작 -->
+
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td><img src="/uploadfile/userphoto/" class="photo"></td>
+						<td></td>
+						<td><a href="edit?idx=${member.idx}" class="btn btn-primary">수정</a>
+							<a href="javascript:del(${member.idx})" class="btn btn-danger">삭제</a>
+						</td>
+					</tr>
+				</tbody>
+				<!-- 리스트 끝 -->
+
+			</table>
+
+
+		</div>
+	</main>
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+	<script>window.jQuery || document.write('<script src="js/assets/vendor/jquery-slim.min.js"><\/script>')</script>
+	<script src="js/assets/vendor/popper.min.js"></script>
+	<script src="js/bootstrap/bootstrap.min.js"></script>
+	<script src="js/assets/js/vendor/holder.min.js"></script>
+	<script src="js/bootstrap/offcanvas.js"></script>
+
+	<script>
+    
+    	$(document).ready(function(){
+    		
+    		$.ajax({
+    			url : 'http://localhost:8080/mm/restapi/v1/members',
+    			type: 'GET',
+    			success : function(res){
+    				
+    				var strHtml = '';
+    				strHtml += '<tr>';
+   					strHtml += '<th>no</th>';
+   					strHtml += '<th>ID(Email)</th>';
+   					strHtml += '<th>이름</th>';
+   					strHtml += '<th>비밀번호</th>';
+   					strHtml += '<th>생일</th>';
+   					strHtml += '<th>성별</th>';
+   					strHtml += '<th>사진</th>';
+   					strHtml += '<th>가입일</th>';
+   					strHtml += '<th>관리</th>';
+   					strHtml += '</tr>';
+    				
+   					for (var i = 0; i < res.length; i++) {
+						let member = res[i];
+   						strHtml += '<tr>';
+   	   					strHtml += '<th>'+member.idx+'</th>';
+   	   					strHtml += '<th>'+member.uid+'</th>';
+   	   					strHtml += '<th>'+member.pw+'</th>';
+   	   					strHtml += '<th>'+member.uname+'</th>';
+   	   					strHtml += '<th>'+member.byear+'</th>';
+   	   					strHtml += '<th>'+member.gender+'</th>';
+   	   					strHtml += '<th>'+member.photo+'</th>';
+   	   					strHtml += '<th>'+member.regdate+'</th>';
+   	   					strHtml += '<th><a href="edit?idx='+member.idx+'" class="btn btn-primary">수정</a><a href="javascript:del('+member.idx+')" class="btn btn-danger">삭제</a></th>';
+   	   					strHtml += '</tr>';
+						
+					}
+   					
+   					/* for ( var member in res) {
+   						strHtml += '<tr>';
+   	   					strHtml += '<th>'+member.idx+'</th>';
+   	   					strHtml += '<th>'+member.uid+'</th>';
+   	   					strHtml += '<th>'+member.pw+'</th>';
+   	   					strHtml += '<th>'+member.uname+'</th>';
+   	   					strHtml += '<th>'+member.byear+'</th>';
+   	   					strHtml += '<th>'+member.gender+'</th>';
+   	   					strHtml += '<th>'+member.photo+'</th>';
+   	   					strHtml += '<th>'+member.regdate+'</th>';
+   	   					strHtml += '<th><a href="edit?idx='+member.idx+'" class="btn btn-primary">수정</a><a href="javascript:del('+member.idx+')" class="btn btn-danger">삭제</a></th>';
+   	   					strHtml += '</tr>';
+					} */
+    				
+   					$('#listbody').html(strHtml);
+    			}
+    			
+    		});
+    		
+    		
+    		
+    	});
+    
+    
+    
+    </script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
