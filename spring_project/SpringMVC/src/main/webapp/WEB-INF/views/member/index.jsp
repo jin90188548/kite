@@ -21,6 +21,10 @@
 	<hr>
 	
 	<ul> 
+		<li><a href="<c:url value="/sample" />">/sample</a></li>
+		<li><a href="<c:url value="/sample/hello" />">/sample/hello</a></li>
+		<li><a href="<c:url value="/sample/hello2" />">/sample/hello2</a></li>
+		<li><a href="<c:url value="/sample/hello3" />">/sample/hello3</a></li>
 		<li><a href="<c:url value="/index" />">/index</a></li>
 		<li><a href="<c:url value="/login/login" />">/login/login</a></li>
 		<li><a href="<c:url value="/order/order" />">/order/order</a></li>
@@ -33,6 +37,8 @@
 		<li><a href="<c:url value="/fileupload/form" />">/fileupload/form</a></li>
 		<li><a href="<c:url value="/uploadfile/test_droid.jpg" />">/uploadfile/test_droid.jpg</a></li>
 		<li><a href="<c:url value="/simple" />">/simple</a></li>
+		<li><a href="<c:url value="/guestmessage/list.xml" />">/guestmessage/list.xml</a></li>
+		<li><a href="<c:url value="/guestmessage/list.json" />">/guestmessage/list.json</a></li>
 	</ul>
 	
 	
