@@ -23,7 +23,7 @@ import com.kite.mm.member.service.MemberRegService;
 import com.kite.mm.member.service.MemberViewService;
 
 @RestController
-@RequestMapping("/restapi/v1/members")
+@RequestMapping("/restapi/v1/members") // /mm/restapi/v1/members
 public class MemberRestController {
 
 	@Autowired
@@ -41,18 +41,27 @@ public class MemberRestController {
 	@Autowired
 	MemberDeleteService deleteService;
 
+	
+	
+	
+	
+	
+	
 	@GetMapping
 	public List<OpMember> getMembers() {
 		return listService.getAllList();
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/{id}")   // /restapi/v1/{id}
 	public OpMember getMember(@PathVariable("id") int idx) {
 		return viewService.getMember(idx);
 	}
 
 	@PostMapping
-	public String regMember(RequestMemberRegist regist, HttpServletRequest request) {
+	public String regMember(
+			RequestMemberRegist regist, 
+			HttpServletRequest request) {
+		
 		String result = "fail";
 		if (regService.memberInsert(request, regist) > 0) {
 			result = "success";
@@ -60,7 +69,7 @@ public class MemberRestController {
 		return result;
 	}
 	
-	@PutMapping("/{idx}")
+	@PutMapping("/{idx}")    // /restapi/v1/{idx}
 	public String editMember(
 			RequestMemberEdit edit, 
 			HttpServletRequest request,
@@ -77,7 +86,7 @@ public class MemberRestController {
 	}
 	
 	
-	@DeleteMapping("/{idx}")
+	@DeleteMapping("/{idx}")    // /restapi/v1/{idx}
 	public String deleteMember(@PathVariable("idx") int idx) {
 		String result = "fail";
 		if (deleteService.memberDelete(idx) > 0) {
