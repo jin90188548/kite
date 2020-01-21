@@ -32,6 +32,7 @@
 		<li><a href="<c:url value="/member/view/hot" />">/member/view/hot</a></li>
 		<li><a href="<c:url value="/fileupload/form" />">/fileupload/form</a></li>
 		<li><a href="<c:url value="/uploadfile/test_droid.jpg" />">/uploadfile/test_droid.jpg</a></li>
+		<li><a href="<c:url value="/simple" />">/simple</a></li>
 	</ul>
 	
 	
