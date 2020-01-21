@@ -21,6 +21,7 @@
 	<hr>
 	
 	<ul> 
+		<li><a href="<c:url value="/client" />">/client</a></li>
 		<li><a href="<c:url value="/sample" />">/sample</a></li>
 		<li><a href="<c:url value="/sample/hello" />">/sample/hello</a></li>
 		<li><a href="<c:url value="/sample/hello2" />">/sample/hello2</a></li>

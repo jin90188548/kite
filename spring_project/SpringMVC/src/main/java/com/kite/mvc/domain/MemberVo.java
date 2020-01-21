@@ -3,7 +3,6 @@ package com.kite.mvc.domain;
 public class MemberVo {
 
 	private int id;
-	@JasonIgnore
 	private String name;
 	private String email;
 	private String photo;
@@ -15,6 +14,15 @@ public class MemberVo {
 		this.email = email;
 		this.photo = photo;
 	}
+	
+	
+	
+
+	public MemberVo() {
+	}
+
+
+
 
 	public int getId() {
 		return id;
