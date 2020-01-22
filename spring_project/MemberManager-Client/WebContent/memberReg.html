@@ -72,7 +72,7 @@
         <h6 class="border-bottom border-gray pb-2 mb-0">회원 가입</h6>
         <div class=" text-muted pt-3">
         
-          <form method="post" enctype="multipart/form-data">
+          <form id="regForm" method="post" enctype="multipart/form-data">
           
           <div class="form-group">
           	<label for="writer">ID(email)</label>
@@ -136,11 +136,46 @@
 	<script src="js/bootstrap/offcanvas.js"></script>
 
 	<script>
-    
+  	
+	
     	$(document).ready(function(){
     		
+    		// js의 ajax이용한 파일업로드 시 : FormData()
+    		
+    		//var form = $('#regForm')[0];
     		
     		
+    		
+    		$('#regForm').submit(function(){
+    			
+    			var formData = new FormData();
+        		formData.append('uid', $('#uid').val());
+        		formData.append('pw', $('#pw').val());
+        		formData.append('uname', $('#uname').val());
+        		formData.append('byear', $('#byear').val());
+        		formData.append('gender', $('#gender').val());
+        		formData.append('photo', $('#photo')[0].files[0]);
+        		
+        		$.ajax({
+        			url : 'http://localhost:8080/mm/restapi/v1/members',
+        			type : 'POST',
+        			processData : false,
+        			contentType : false,
+        			data : formData,
+        			success : function(res){
+        				
+        				if(res=='success'){
+        					alert('회원가입이 정상적으로 처리되었습니다.');
+        					$(this).reset();
+        				} else {
+        					alert('회원가입 처리시 문제가 발생했습니다.\n다시 확인해주세요.');
+        				}
+        			}        			
+        		});
+    			
+    			
+    			return false;
+    		});
     		
     		
     	});

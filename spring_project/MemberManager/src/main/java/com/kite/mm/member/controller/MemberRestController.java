@@ -62,6 +62,8 @@ public class MemberRestController {
 			RequestMemberRegist regist, 
 			HttpServletRequest request) {
 		
+		System.out.println(regist);
+		
 		String result = "fail";
 		if (regService.memberInsert(request, regist) > 0) {
 			result = "success";

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- interface의 full name을 namespace의 속성으로 사용 : 필수 -->
+<mapper namespace="com.kite.demo.mapper.MemberMapper">
+
+	<!-- select 결과 메핑을 위한 resultMap 설정 -->
+	<resultMap id="resultMemberInfo"
+		type="com.kite.demo.domain.OpMember">
+		<id property="idx" column="idx" />
+		<result property="uid" column="uemail" />
+		<result property="pw" column="upw" />
+		<result property="uname" column="uname" />
+		<result property="byear" column="byear" />
+		<result property="gender" column="gender" />
+		<result property="uphoto" column="uphoto" />
+		<result property="regDate" column="date" />
+	</resultMap>
+
+	<!-- 회원 정보 -->
+	<select id="selectMemberById" resultMap="resultMemberInfo">
+
+		select * from opmember where uemail=#{id}
+
+	</select>
+
+
+</mapper>
+
+
+ 
+ 
