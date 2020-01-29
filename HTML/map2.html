@@ -1,0 +1,106 @@
+<html>
+
+<head>
+    <title>예보</title>
+    <style>
+        div.box {
+            border : 5px solid #DDD;
+            padding : 10px;
+            margin : 5px;
+            line-height: 160%;
+            width: 300px;
+            float: left;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+</head>
+
+<body>
+    <!--<a href="http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst?&&&"> 확인 </a>-->
+    
+    
+    <script>
+        $(document).ready(function(){
+           
+            $.ajax({
+                url : 'http://localhost:8080/mm/weather',
+                data : {                    serviceKey:'ZQr9%2FQSrAgf5QXr69EKYDIgkLNdrAn0ci8EGTJFgK%2FeX5VGQZM7IsIdhTiDk%2B7PPwPgoIG1ALpjxXw41PmCtyg%3D%3D',
+                    numOfRows:10,
+                    pageNo:1,
+                    base_date:'20200128',
+                    base_time:'0200',
+                    nx:61,
+                    ny:125,
+                    ftype:'ODAM'
+                },
+                success : function(res){
+                    
+                    var str = '';
+                    
+                    $(res).find('item').each(function(){
+                        
+                        var baseDate = $(this).find('baseDate').text();
+                        var baseTime = $(this).find('baseTime').text();
+                        var category = $(this).find('category').text();
+                        var fcstDate = $(this).find('fcstDate').text();
+                        var fcstTime = $(this).find('fcstTime').text();
+                        var fcstValue = $(this).find('fcstValue').text();
+                        var nx = $(this).find('nx').text();
+                        var ny = $(this).find('ny').text();
+                        var cname = '';
+                        
+                        if(category=='POP'){
+                            cname = '강수확률';
+                        } else if(category=='PTY'){
+                            cname = '강수형태';
+                        } else if(category=='R06'){
+                            cname = '6시간 강수량';
+                        } else if(category=='REH'){
+                            cname = '습도';
+                        } else if(category=='S06'){
+                            cname = '6시간 신적설';
+                        } else if(category=='SKY'){
+                            cname = '하늘상태';
+                        } else if(category=='T3H'){
+                            cname = '3시간 기온';
+                        } else if(category=='TMN'){
+                            cname = '아침 최저기온';
+                        } else if(category=='TMX'){
+                            cname = '낮 최고기온';
+                        } else if(category=='UUU'){
+                            cname = '풍속(동서성분)';
+                        } else if(category=='VVV'){
+                            cname = '풍속(남북성분)';
+                        } else if(category=='WAV'){
+                            cname = '파고';
+                        } else if(category=='VEC'){
+                            cname = '풍향';
+                        } else if(category=='WSD'){
+                            cname = '풍속';
+                        }
+                        
+                        
+                        
+                        str += '<div class="box">\n';
+                        str += '<div>baseDate : '+baseDate+'</div>\n';
+                        str += '<div>baseTime : '+baseTime+'</div>\n';
+                        str += '<div>category : '+category+' < '+cname+' ></div>\n';
+                        str += '<div>fcstDate : '+fcstDate+'</div>\n';
+                        str += '<div>fcstTime : '+fcstTime+'</div>\n';
+                        str += '<div>fcstValue : '+fcstValue+'</div>\n';
+                        str += '<div>nx : '+nx+'</div>\n';
+                        str += '<div>ny : '+ny+'</div>\n';
+                        str += '</div>\n';
+                    });
+                    
+                    
+                    $('body').html(str);
+                }                
+            });
+            
+        });
+    </script>
+    
+</body>
+
+</html>

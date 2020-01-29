@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <title>예보</title>
+    <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+</head>
+
+<body>
+    <a href="http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst?serviceKey=ZQr9%2FQSrAgf5QXr69EKYDIgkLNdrAn0ci8EGTJFgK%2FeX5VGQZM7IsIdhTiDk%2B7PPwPgoIG1ALpjxXw41PmCtyg%3D%3D&numOfRows=10&pageNo=1&base_date=20200129&base_time=0200&nx=61&ny=125"> 확인 </a>
+    
+    
+    <script>
+        $(document).ready(function(){
+           
+            $.ajax({
+                url : 'http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst',
+                data : {                    serviceKey:'ZQr9%2FQSrAgf5QXr69EKYDIgkLNdrAn0ci8EGTJFgK%2FeX5VGQZM7IsIdhTiDk%2B7PPwPgoIG1ALpjxXw41PmCtyg%3D%3D',
+                    numOfRows:10,
+                    pageNo:1,
+                    base_date:'20200128',
+                    base_time:'0200',
+                    nx:61,
+                    ny:125,
+                    ftype:'ODAM'
+                },
+                success : function(res){
+                    alert(res);
+                    $('body').html(res);
+                }                
+            });
+            
+        });
+    </script>
+    
+</body>
+
+</html>
