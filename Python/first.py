@@ -75,12 +75,10 @@ print("First Python")  # print 실행
 
 ns = "안녕하세요"
 
-
 print(len(ns))
 
 print(ns[4])
 print(ns[-5])
-
 print(ns[1:3])
 print(ns[:3])
 print(ns[3:])
@@ -101,8 +99,8 @@ print(5*"Python")
 
 # 식별자 주의사항
 # 키워드, 함수이름, 모듈이름, 클래스이름 과 동일하게 사용하면 안된다.
-#str = 'abc';  # 기존의 str 함수가 변수 str 변경 : 오류가 아니다.
-#print(str('abc')) # str 함수 호출 오류 발생
+#  = 'astrbc'  # 기존의 str 함수가 변수 str 변경 : 오류가 아니다.
+# print(str('abc')) # str 함수 호출 오류 발생
 
 
 # 기본 내장 함수 type
@@ -113,7 +111,9 @@ print(type([1,2,3,5,7,9]))
 
 # 기본 내장 함수 range
 print("----- range() -----")
-numbers = range(0,10,2)
+numbers = list(range(0,10,2))
+numbers = list(range(3,10))
+numbers = list(range(10))
 print(numbers)
 
 # 기본 내장 함수 str
