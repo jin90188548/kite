@@ -1,5 +1,8 @@
 # Student Class 정의
 class Student:
+
+    count = 0
+
     # Contsructor 정의
     def __init__(self, name, kor, math, eng, sci):
         self.name=name
@@ -7,6 +10,9 @@ class Student:
         self.math=math
         self.english=eng
         self.science=sci
+
+        Student.count += 1
+        print('인스턴스가 생성되었습니다.')
     
     # 각 과목의 점수의 합을 구해 반환하는 메서드
     def score_sum(self):
@@ -15,6 +21,17 @@ class Student:
     # 각 과목의 평균값을 구해 반환하는 메서드 
     def score_avg(self):
         return self.score_sum()/4
+
+    # __str__() 재 정의
+    def __str__(self):
+        return '{}\t{}\t{}'.format(self.name, self.score_sum(), self.score_avg())
+
+    @classmethod
+    def print(cls):
+        print(Student.count)
+
+
+Student.print()
 
 # 데이터 저장용 list 선언, 데이터 입력
 # Student class 를 이용한 Object 생성
@@ -28,9 +45,12 @@ students = [
     Student('Kim', 80, 77, 60, 100)
     ]
 
+print('{}개의 리스트 의 요소가 생성되었습니다. '.format(Student.count))
+
 # 학생들의 이름, 총점, 평균
 print('이름', '총점', '평균', sep='\t')
 
 # 학생 리스트 반복 출력
 for st in students:
-    print(st.name, st.score_sum(), st.score_avg(), sep='\t')
+    #print(st.name, st.score_sum(), st.score_avg(), sep='\t')
+    print(st)

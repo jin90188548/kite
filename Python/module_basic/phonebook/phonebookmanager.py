@@ -27,6 +27,12 @@ class PhoneInfo:
     def checkInfo(self, keyword):
         return self.name==keyword
 
+    # __str__() 함수 재정의
+    def __str__(self):
+        return '--- 정보출력 시작 -------------------\n이름 : {}\n전화번호 : {}\n생일 : {}\n--- 정보출력 종료 -------------------'.format(
+            self.name, self.phonenumber, self.birthday
+        )
+
 
 
 
@@ -54,8 +60,8 @@ def insertMember():
 
 def showList():
     for member in pBooks:
-        #print(member)
-        member.showinfo()
+        print(member)
+        #member.showinfo()
 
 
 def searchInfo():
@@ -68,7 +74,8 @@ def searchInfo():
 
     for member in pBooks:
         if member.checkInfo(keyword):
-            member.showinfo()
+            #member.showinfo()
+            print(member)
             chk_num += 1
     
     if(chk_num==0):
