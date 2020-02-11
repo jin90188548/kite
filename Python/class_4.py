@@ -52,3 +52,4 @@ print('반지름 : ', c_1.radious, sep='\t')
 print('원의 둘레길이 : ', c_1.get_circumference(), sep='\t')
 # 넓이
 print('원의 넓이 : ', c_1.get_cirarea())
+
