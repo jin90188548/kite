@@ -85,12 +85,20 @@ def deleteInfo():
     searchIndex = 0
     delCnt = 0
 
-    for member in pBooks:
+    # for member in pBooks:
+    #     if member.checkInfo(keyword):            
+    #         del pBooks[searchIndex]
+    #         delCnt += 1
+        
+    #     searchIndex += 1
+
+    # [(0, {}),(1,{}),(2,{}) ]
+    for i, member in enumerate(pBooks):
         if member.checkInfo(keyword):            
-            del pBooks[searchIndex]
+            del pBooks[i]
             delCnt += 1
         
-        searchIndex += 1
+    
     
     if(delCnt==0):
         print('찾으시는 이름의 정보가 존재하지 않습니다.')
