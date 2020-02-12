@@ -1,7 +1,7 @@
 from module_basic.phonebook import phonebookmanager_sqlite as pbms
 import sys
 
-
+# 최초 프로그램 실행하면 DB 에서 데이터를 가져와서 list에 저장을 한다.
 if pbms.init==0:
     pbms.start_init()
 

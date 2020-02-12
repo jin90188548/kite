@@ -37,26 +37,32 @@ class PhoneInfo:
 
 import sqlite3
 
-
+# 프로그램을 최초 실행 후 DB 로드 여부 확인
+# 로드 했을경우 : 1 로 변경
+# 모듈 내부의 전역 변수
 init = 0
 
 # 친구의 정보를 저장하는 리스트
 pBooks = [] 
 
+# DB 있는 데이터를 list 저장 기능 함수
 def start_init():
 
-    global pBooks
+    global pBooks # pBook 변수는 전역변수를 쓰겠다
     pBooks = [] 
 
     global init
 
+    # slqite 접속
     con = sqlite3.connect('phonebook')
     cur = con.cursor()
 
+    # sql 실행
     sql_select_all = 'select * from phonebook'
     cur.execute(sql_select_all)
 
-    while True:
+    # 가져온데터를 행단위로 처리( list에 객체로 저장 )
+    while True:  # False : 0, '', None, [], {} 
         row = cur.fetchone()
         if row == None:
             break
@@ -93,6 +99,7 @@ def insertMember():
     cur = con.cursor()
     sql_insert = 'insert into phonebook values (\'{}\', \'{}\', {})'.format(member.name, member.phonenumber, member.birthday)
     cur.execute(sql_insert)
+    # DML 작업후 반드시 commit 처리
     con.commit()
     con.close()
     # DB close
@@ -103,7 +110,7 @@ def insertMember():
     print('등록되었습니다.')
 
 def showList():
-    start_init()
+    #start_init()
     for member in pBooks:
         print(member)
         #member.showinfo()
@@ -160,6 +167,7 @@ def deleteInfo():
         con.commit()
         con.close()
         # DB close
+        
         start_init()
 
 
