@@ -33,6 +33,20 @@ class PhoneInfo:
             self.name, self.phonenumber, self.birthday
         )
 
+import logging
+
+logger = logging.getLogger('phonebook')
+hand = logging.FileHandler('phonebook_20200212.log')
+
+#                              생성시간,   로그레벨 ,       프로세스ID,   메시지
+formatter = logging.Formatter('%(asctime)s %(levelname)s %(process)d %(message)s')
+
+# 파일핸들러에 문자열 포메터를 등록
+hand.setFormatter(formatter)
+
+logger.addHandler(hand)
+
+logger.setLevel(logging.INFO)
 
 
 import sqlite3
@@ -69,6 +83,8 @@ def start_init():
         pBooks.append(PhoneInfo(row[0], row[1], row[2]))
     
     if init == 0 :
+        logger.info('program start')
+        logger.info('Database Data Load success')
         print('DB로 부터 데이터를 로드하였습니다.')
 
     init = 1
@@ -104,6 +120,8 @@ def insertMember():
     con.close()
     # DB close
 
+    logger.info('Member Data insert success')
+
     #pBooks.append(member)
     start_init()
 
@@ -136,6 +154,7 @@ def searchInfo():
             chk_num += 1
     
     if(chk_num==0):
+        logger.warning('Not Found Data...')
         print('찾으시는 이름의 정보가 존재하지 않습니다.')
     
 
