@@ -1,0 +1,9 @@
+라즈비안 에서 FT 서버 설정
+
+ftp 서버 프로그램 설치
+sudo apt-get install vsftpd
+
+서버 실행
+sudo service vsftpd [start, restart, stop, status]
+
+파일질라(FTP Client 프로그램)를 이용해서 파일 업로드
