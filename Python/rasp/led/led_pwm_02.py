@@ -15,11 +15,6 @@ LED = 11
 # 핀 설정
 GPIO.setup(LED, GPIO.OUT, initial=GPIO.LOW)
 
-# PWM 객체 생성 : 11번 핀, 주파수 - 100Hz
-p = GPIO.PWM(LED, 100)
-
-# PWM 신호 출력
-p.start(0)
 
 
 
