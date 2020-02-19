@@ -2,8 +2,13 @@
 
 # flask
 from flask import Flask
+
+# CORS
+from flask_cors import CORS
+
 # request param 
 from flask import request
+
 # GPIO 
 import RPi.GPIO as GPIO
 
@@ -33,6 +38,7 @@ def change_duty(dc):
 ####################################################
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def index():

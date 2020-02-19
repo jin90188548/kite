@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<!-- <link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous"> -->
+<!--CDN 방식으로 jQuery 라이브러리를 로드-->
+<script src="https://code.jquery.com/jquery-1.12.4.js"
+	integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+	crossorigin="anonymous"></script>
+	
+	<style>
+		input[type=button] {
+			/* background-color: #EEE; */
+			border : 1px solid #AAA;
+			padding: 15px;
+			margin: 10px;
+			display: block;
+			font-size: 24px;
+		}
+		.select_g {
+			background-color: green;
+			color: #FFF
+		}
+		.select_r {
+			background-color: red;
+			color: #FFF
+		}
+		.select_y {
+			background-color: yellow;
+			color: #000
+		}
+	</style>
+	
+	
+</head>
+<body>
+	<h1>신호등 밝기 콘트롤러</h1>
+	
+	<input type="range" id="br_val" min="0" max="100" value="0">
+	<span id="num">0</span>
+	<br>
+	<input type="button" id="btn" value="전송">
+	
+	
+
+<script>
+	
+	$(document).ready(function(){
+		
+		$('#br_val').change(function(){
+			$('#num').text($(this).val())
+			
+
+			$.ajax({
+				url:'http://192.168.0.64:5000' ,
+				data:{
+					led:'red',
+					p_val:$('#br_val').val()
+				},
+				method:'get',
+				success:function(res){
+					alert(res)
+				}
+			});
+			
+		});
+		
+		$('#btn').click(function(){
+			
+			$.ajax({
+				url:'http://192.168.0.64:5000' ,
+				data:{
+					led:'red',
+					p_val:$('#br_val').val()
+				},
+				method:'get',
+				success:function(res){
+					alert(res)
+				}
+			});
+			
+		});
+		
+		
+		
+	});
+	
+
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
