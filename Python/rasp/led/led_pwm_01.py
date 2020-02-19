@@ -22,15 +22,23 @@ GPIO.setup(LED, GPIO.OUT, initial=GPIO.LOW)
 p = GPIO.PWM(LED, 100)
 
 # PWM 신호 출력
-p.start(5)
-time.sleep(5)
-p.start(50)
-time.sleep(5)
-p.start(30)
-time.sleep(5)
-p.start(80)
-time.sleep(5)
-p.start(100)
+p.start(0)
+
+while 1:
+    
+    for value in dc:
+        # 듀티 변경
+        p.ChangeDutyCycle(value)
+        time.sleep(0.1)
+
+        dc.reverse()
+        time.sleep(0.1)
+
+
+
+
+
+
 
 
 # PWM 정지
