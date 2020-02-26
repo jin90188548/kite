@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <pre>
+    Contents
+Profile of Dragit..................................................................................................................................................................1
+Install Dragit........................................................................................................................................................................1
+Lesson 1 Dual-Color LED ..............................................................................................................................................6
+Lesson 2 RGB LED Module...........................................................................................................................................9
+Lesson 3 7-Color Auto-flash LED........................................................................................................................... 12
+Lesson 4 Relay Module............................................................................................................................................... 14
+Lesson 5 Laser Emitter Module............................................................................................................................... 17
+Lesson 6 Button Module............................................................................................................................................ 22
+Lesson 7 Tilt-Switch Module .................................................................................................................................... 24
+Lesson 8 Mercury Switch ........................................................................................................................................... 27
+Lesson 9 IR Receiver Module................................................................................................................................... 30
+Lesson 10 Buzzer Module.......................................................................................................................................... 33
+Lesson 11 Reed Switch................................................................................................................................................ 38
+Lesson 12 Photo-interrupter.................................................................................................................................... 41
+Lesson 13 PCF8591....................................................................................................................................................... 44
+Lesson 14 Rain Detection Module........................................................................................................................ 48
+Lesson 15 Joystick PS2................................................................................................................................................ 51
+Lesson 16 Potentiometer Module......................................................................................................................... 55
+Lesson 17 Hall Sensor.................................................................................................................................................. 58
+Lesson 18 Temperature Sensor............................................................................................................................... 63
+Lesson 19 Sound Sensor............................................................................................................................................ 67
+Lesson 20 Photoresistor Module........................................................................................................................... 70
+Lesson 21 Flame Sensor............................................................................................................................................. 72
+Lesson 22 Gas Sensor.................................................................................................................................................. 75
+Lesson 23 IR Remote Control .................................................................................................................................. 78
+Lesson 24 Touch Switch.............................................................................................................................................. 84
+Lesson 25 Ultrasonic Ranging Module............................................................................................................... 87
+Lesson 26 DS18B20 Temperature Sensor.......................................................................................................... 90
+Lesson 27 Rotary Encoder Module....................................................................................................................... 92
+Lesson 28 Humiture Sensor...................................................................................................................................... 95
+Lesson 29 IR Obstacle Avoidance Module........................................................................................................ 98
+Lesson 30 I2C LCD1602 ............................................................................................................................................100
+Lesson 31 Barometer BMP280..............................................................................................................................103
+Lesson 32 MPU6050 Gyro Acceleration Sensor...........................................................................................106
+Lesson 33 RTC DS1302..............................................................................................................................................109
+Lesson 34 Tracking Sensor......................................................................................................................................112
+1 www.sunfounder.com
+Profile of Dragit
+For detailed Python and C code and general user manual, refer to LEARN page.
+Instead of coding the Sensor Kit directly in Python, you can also do it in a graphical/visual
+programming software - Dragit, developed based on Snap! (check http://snap.berkeley.edu/ for
+more). What's good about Dragit is that, the programming process is visible with graphics. So you
+can just drag and drop the blocks (unit in the software) to make the code in each lesson, no need of
+the knowledge of any programming languages or syntaxes.
+So now, let's explore the wonderful programming world in sensors, with Dragit!
+Install Dragit
+Before any operations, you need to log into the Raspberry Pi remotely first. Here's how:
+1． Get the IP address of the Raspberry Pi:
+https://www.raspberrypi.org/documentation/remote-access/ip-address.md
+2． Log in with the IP address, by ssh or VNC:
+For ssh: https://www.raspberrypi.org/documentation/remote-access/ssh/README.md
+For VNC: https://www.raspberrypi.org/documentation/remote-access/vnc/README.md
+Now you're on the RPi already. Open a terminal for command lines. Let's see what next.
+1. Type in the command below:
+wget https://s3.amazonaws.com/sunfounder/Raspberry/dragit_installer.py
+2. After download is done, type in the command to run:
+2 www.sunfounder.com
+sudo python dragit_installer.py
+3. Then you can see what to install. Switch to the one you'd like to install by the arrow key, and
+check the box by Space bar.
+To apply the sensor kit with Dragit, you only need to install the top one, Install Dragit.
+Then the program will finish the installation automatically. Just wait for a while and DO NOT
+disconnect the network.
+If the prompt above appears, it means the installation is done.
+Then reboot the Raspberry Pi:
+sudo reboot
+On your computer/tablet, open a web browser (Chrome/Firefox/Safari recommended), enter the IP
+address of the Raspberry Pi and then 8000:
+Example: 192.168.0.177:8000
+3 www.sunfounder.com
+Then you're in the Dragit window.
+Introduction to Dragit
+Dragit is a visual programming language software developed based on Snap! (check
+http://snap.berkeley.edu/ for more). What's good about Dragit is that, the programming process is
+visible with graphics. So you can just drag and drop the blocks (unit in the software) to make the code
+to control the port, needing no knowledge of any programming languages or syntaxes.
+So now, let's explore the wonderful programming world in PiSmart, with Dragit!
+4 www.sunfounder.com
+Toolbar
+On the Toolbar at top, besides file saving, settings and zoom in/out, there are also Execute, Pause
+and Stop buttons.
+Stage
+On Stage at the top right corner, the icon you added and the data set will be displayed here.
+Scripting Area
+There can be one or more scripts for a project in Dragit. The scripts are shown in the scripting area
+and constructed by blocks in the palette.
+On the scripting area, you can drag the blocks there and make and combine larger chunks.
+Palette
+On the upper area of the Palette, there are 14 categories including Motion, Control, Modules, etc.
+And on the lower part the blocks of that category are shown. If the scripting area is the canvas, then
+the palette is what you use to fulfill your imagination and bring innovative ideas into reality.
+Motion
+The Motion category includes the , and blocks,
+for movement.
+Control
+The Control category includes , , and blocks, for execution,
+loop and determination of programs.
+Modules
+5 www.sunfounder.com
+The Modules category includes , ,
+and blocks, for acquiring values returned from various sensor
+modules and control of the display module.
+RaspberryPi
+The RaspberryPi category includes , , and
+blocks, for GPIO port control and data collection of the Raspberry Pi.
+PiCar_V, PiCar_S , and PiPlus
+The PiCar_V, PiCar_S and PiPlus categories include blocks for control of these three robot and
+learning kits.
+PiSmart
+The PiSmart category includes blocks for analog signal acquisition , digital signal
+acquisition , speech , speech recognition , LED
+control , motor control , servo control , and
+dictionary setting .
+Variables
+The Variables category includes , , and blocks for variable and
+block making, variable value setting and list creation. 
+6 www.sunfounder.com
+Lesson 1 Dual-Color LED
+WHAT IS IT
+Semiconductor light-emitting diode (LED) is a type of component which can turn electric energy into
+light energy via PN junctions. A dual-color LED is capable of emitting two different colors of light,
+typically red and green, rather than only one color.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * Dual-color LED module
+- 1 * 3-Pin anti-reverse cable
+WHAT WE WANT TO DO
+Connect pin R and G to GPIOs of Raspberry Pi, program the Raspberry Pi to change the color of the
+LED to red or green.
+HOW WE'RE GOING TO DO
+Step 1: Build the circuit
+T-Cobbler Dual-Color LED Module
+GPIO17 R
+GND GND
+GPIO18 G
+7 www.sunfounder.com
+Step 2: Drag it
+1．In the Palette, click the category.
+2．Drag the block under the category to the scripting area.
+3．Select the value for the block.
+On the left is the channel to output. In the wiring previously, pin R of the Dual-Color LED Module
+connects to GPIO17 of the Raspberry Pi, so here select 17 behind gpio to control the red (R) LED;
+select 18 to control the green (G) one.
+On the right is the value of output. Since GND of the module connects to GND of the RPi, when
+you select HIGH here, the LED will light up; select LOW, it'll go out.
+4．Click this block and you'll see the red LED of the Dual-Color LED Module lights up. 
+8 www.sunfounder.com
+Select LOW for output and click the block again. Yep, the LED goes out.
+So in the same way, drag one more such block to the scripting area, select 18 for gpio, HIGH for
+output, and then you can use it to control the G (green) LED. 
+9 www.sunfounder.com
+Lesson 2 RGB LED Module
+WHAT IS IT
+RGB LED modules can emit various colors of light. The three primary colors of red, green, and blue
+can be mixed and compose all kinds of colors by brightness, so you can make an RGB LED emit
+colorful light by controlling the circuit.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * RGB LED module
+- 1 * 4-Pin anti-reverse cable
+WHAT WE WANT TO DO
+Here we input any value between 0 and 100 to the three pins of the RGB LED to make it display
+different colors.
+RGB LEDs can be categorized into common anode LED and common cathode LED. In this experiment,
+we use a common cathode RGB LED.
+HOW WE'RE GOING TO DO
+Step 1: Build the circuit according to the following method
+T-Cobbler RGB LED Module
+5V VCC
+GPIO17 R
+GPIO18 G
+GPIO27 B
+10 www.sunfounder.com
+Step 2: Drag it
+1．In the Palette, click the category.
+2．Drag the block
+into the scripting area.
+11 www.sunfounder.com
+3．Set the parameters.
+Based on the wiring before, R connects to pin 17, G
+to pin 18 and B to pin 27; the RGB LED used here is a
+common cathode one, so no need to change the
+com. Then select a color to shine. Note: Since the
+color of this palette works differently with the RGB
+LED and PWM output of the RPi adds to the situation,
+the color selection here is not that good in display by
+the RGB. The colors in the orange box would be
+much better in reality, so you're recommended to
+select these as possible.
+You will see the RGB LED light up, and display
+different colors in turn.
+12 www.sunfounder.com
+Lesson 3 7-Color Auto-flash LED
+WHAT IS IT
+On the 7-Color Auto-flash LED module, the LED can automatically flash built-in colors after power on.
+It can be used to make quite fascinating light effects.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * 7-color auto-flash LED module
+- 1 * 3-Pin anti-reverse cable
+WHAT WE WANT TO DO
+When it is power on, the 7-color auto-flash LED will flash built-in colors.
+HOW WE'RE GOING TO DO
+Build the circuit
+T-Cobbler Auto-flash LED Module
+GND GND
+5V0 VCC
+13 www.sunfounder.com
+Note: There are two “GND” pins on the module. You only need to connect one of them.
+Now, you will see 7-color auto-flash LED flashing seven colors.
+14 www.sunfounder.com
+Lesson 4 Relay Module
+WHAT IS IT
+Relay is a device which is used to provide connection between two or more points or devices in
+response to the input signal applied. It is suitable for driving high power electric equipment, such as
+light bulbs, electric fans and air conditioning. You can use a relay to control high voltage with low
+voltage by connecting it to Raspberry Pi.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * Relay module
+- 1 * Dual-color LED module
+- 2 * 3-Pin anti-reverse cable
+WHAT WE WANT TO DO
+Connect the base electrode of the transistor to BCM17. When we make BCM17 output high level
+(3.3V) by programming, the transistor will conduct because of current saturation. The normally open
+contact of the relay will be closed, while the normally closed contact of the relay will be broken; when
+we make it output low level (0V), the transistor will be cut off, and the relay will recover to initial state.
+HOW WE'RE GOING TO DO
+Step 1: Build the circuit
+T-Cobbler Relay Module
+GPIO17 SIG
+5V0 VCC
+GND GND
+3V3 COM
+Dual-color LED Module T-Cobbler Relay Module
+R * Normal Open
+GND GND *
+G * Normal Close
+15 www.sunfounder.com
+Step 2: Drag it
+1．In the Palette, click the category.
+2．Drag the block into the scripting area.
+3．Set the parameters for the block.
+16 www.sunfounder.com
+In the circuit connection before, pin SIG of the Relay Module connects to gpio17, so here select
+gpio17 to control the module. As mentioned in Lesson 1, set the output value on the right side.
+Based on the introduction of the relay previously, if HIGH is selected for output here, the red LED
+of the Dual-color LED module will light up; if you select LOW, the green one will be turned on.
+4．Click the block and you'll see the red LED of the Dual-Color LED Module light up.
+Select LOW for output and try to click the block again. Yep, the green light brightens.
+Now, you may hear the ticktock. That's the normally closed contact opened and the normally open
+contact closed. You can attach a high voltage device you want to control, like a 220V bulb, to the
+output port of the relay. Then the relay will act as an automatic switch.
+17 www.sunfounder.com
+Lesson 5 Laser Emitter Module
+WHAT IS IT
+Laser is widely used in medical treatment, military, and other fields due to its good directivity and
+energy concentration.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * Laser Emitter module
+- 1 * 2-Pin anti-reverse cable
+WHAT WE WANT TO DO
+In this lesson, let's use Dragit to control the interrupt of the Laser Emitter module to send Morse
+code.
+HOW WE'RE GOING TO DO
+Step 1: Build the circuit
+T-Cobbler Laser Emitter Module
+5V0 VCC
+GPIO17 SIG
+18 www.sunfounder.com
+Step 2: Drag it
+1．In the Palette, click the category.
+2．Drag into the scripting area.
+3．Enter the parameters for the block.
+In the circuit connection before, pin SIG of the Laser Emitter Module connects to gpio17, so here
+select gpio17 to control the module. As mentioned before, set the output value on the right side.
+Based on the introduction of the laser emitter above, if HIGH is selected for output here, the
+module will be turned off; if you select LOW, the module will emit laser rays.
+4．Click the block and you can control the interrupt of the Laser emitter Module.
+5．Now we can imitate the Morse code with the interrupt of the laser emitter module.
+But first here are some tips for using the Dragit: 
+19 www.sunfounder.com
+
+1) Combine blocks: Find and click the block under the category,
+drag it under the gpio block. A white line will appear when they get close, drop the block and
+they'll stick together and make a chunk block.
+2) Duplicate a block: Right click on the chunk, select duplicate to copy this block. This function
+makes repeating blocks much easier.
+3) Self-define a block: Under the block , click at the bottom to selfcustom a block.
+○1 Click the block
+○2 Click Make a block
+○3 Set the category of the
+to-be-created block:
+Modules
+○4 Set the type: Command
+○5 Name the block: Dit
+○6 Click OK to confirm the
+creation
+Then the new block will appear on the window:
+20 www.sunfounder.com
+So drag the previously combined block into the Block Editor, under the Dit. Click OK. Now under the
+Modules you can see the new Dit block. If you still want to change it, just right-click on it and select
+edit, so you'll return to this window.
+In the same way, make a block named Dah.
+Set the steady lighting on as "-" and quick flashing for "·" in Morse code. Based on the figure above,
+we can create and send a message by the on and off of the laser emitter module. For example, the
+Morse for SOS is: ··· －－－ ···. Program the laser rays to show like that, to put it simple, 3 steady on,
+3 flashing and again 3 steady on, so we get an SOS!
+All you need to do is use the self-defined Dit (flashing) and Dah (steady light) blocks to make this
+code.
+21 www.sunfounder.com
+Not difficult to see that the combined block gets more concise after being self-customed.
+Now you can see the module send out Morse signals.
+Note: Do NOT look directly at the laser head for your safety. It can cause great harm to your eyes. You
+can point the laser beam to the table and see the light spot flashing on the table.
+22 www.sunfounder.com
+Lesson 6 Button Module
+WHAT IS IT
+In this lesson we'll use a simple but common push button.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * Button module
+- 1 * Dual-color LED module
+- 2 * 3-Pin anti-reverse cable
+WHAT WE WANT TO DO
+In this lesson, we will use the button module to control a dual-color LED module.
+The LED on the module will emit green light first. Press the button, and it'll turn to red. Release the
+button, and the LED will flash green again.
+HOW WE'RE GOING TO DO
+Step 1: Build the circuit
+T-Cobbler Button Module
+GPIO17 SIG
+5V0 VCC
+GND GND
+T-Cobbler Dual-Color LED Module
+GPIO18 R
+GND GND
+GPIO27 G
+23 www.sunfounder.com
+Step 2: Drag it
+1．In palette, click the category.
+2．Drag the and the scripting
+area.
+3．Enter the values for
+4．Drag the if-else and forever block from the Control category
+and combine.
+5．After the combination it should be like as shown in the figure
+on the left.
+6．Click the green flag to run.
+24 www.sunfounder.com
+Lesson 7 Tilt-Switch Module
+WHAT IS IT
+The tilt-switch module (as shown below) in this kit is a ball tilt-switch with a metal ball inside. It is used
+to detect inclinations of a small angle.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * Dual-color LED module
+- 1 * Tilt-switch module
+- 2 * 3-Pin anti-reverse cable
+WHAT WE WANT TO DO
+In this lesson, we will use tilt-switch module to control a dual-color LED module.
+When the ball in tilt switch runs from one end to the other end due to shaking caused by external
+force, the tilt switch will conduct and the LED will emit red light, otherwise it will break and the LED
+will emit green light.
+HOW WE'RE GOING TO DO
+Step 1: Build the circuit
+T-Cobbler Tilt Switch Module
+GPIO17 SIG
+5V0 VCC
+GND GND
+T-Cobbler Dual-Color LED Module
+GPIO18 R
+GND GND
+GPIO27 G
+25 www.sunfounder.com
+Step 2: Drag it
+1． In palette, click the category.
+2． Drag the and the
+scripting area.
+3． Enter the values for
+4． Drag the if-else and forever block from the Control
+category and combine.
+5． After the combination it should be like as shown in the
+figure on the left.
+6． Click the green flag to run.
+Place the tilt switch module horizontally, and the LED will flash green. When you tilt it, "Tilt!" will be
+printed on the screen and the LED will change to red. Place it horizontally again, and the LED will flash
+green again.
+26 www.sunfounder.com
+27 www.sunfounder.com
+Lesson 8 Mercury Switch
+WHAT IS IT
+Similar to a tilt switch, a mercury switch is used to detect slight inclinations of a large angle.
+A mercury switch (also known as a mercury tilt switch) is a switch which opens and closes
+an electrical circuit through a small amount of liquid mercury.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * Dual-color LED module
+- 1 * Mercury switch module
+- 2 * 3-Pin anti-reverse cable
+WHAT WE WANT TO DO
+When you tilt the switch, the circuit will conduct and the LED flashes red. Place it horizontally and the
+LED will change to green.
+Note:
+Mercury is harmful to human body and environment. Thus, please be careful when using a mercury
+switch in case of glass breaking. It should also be properly handled if it's no longer used.
+HOW WE'RE GOING TO DO
+Step 1: Build the circuit
+T-Cobbler Dual-Color LED
+Module
+GPIO18 R
+GND GND
+GPIO27 G
+T-Cobbler Mercury Switch
+Module
+GPIO17 SIG
+5V0 VCC
+GND GND
+28 www.sunfounder.com
+Step 2: Drag it - drag the blocks and change the values just as in the previous lessons.
+Place the mercury switch module horizontally, and the LED will light up green. Tilt it at an angle. Then
+"Mercury Tilt!" will be printed on the screen and the LED will flash red. Place it horizontally again, and
+it will change back to green.
+29 www.sunfounder.com
+30 www.sunfounder.com
+Lesson 9 IR Receiver Module
+WHAT IS IT
+Similar to a tilt switch, a mercury switch is used to detect slight inclinations of a large angle. A mercury
+switch (also known as a mercury tilt switch) is a switch which opens and closes an electrical
+circuit through a small amount of liquid mercury.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * IR receiver module
+- 1 * IR Remote Controller
+- 1 * 3-Pin anti-reverse cable
+WHAT WE WANT TO DO
+In this lesson, we'll record the times keys on the remote control are pressed.
+HOW WE'RE GOING TO DO
+Step 1: Build the circuit
+T-Cobbler IR Receiver Module
+GPIO17 SIG
+5V0 VCC
+GND GND
+31 www.sunfounder.com
+Step 2: Drag it - drag the blocks and change the values just as in the previous lessons.
+Now point the remote control at the receiver, and press keys on the remote. You can see the times of
+signal received by the IR receiver on stage. 
+32 www.sunfounder.com
+33 www.sunfounder.com
+Lesson 10 Buzzer Module
+WHAT IS IT
+Buzzers can be categorized as active and passive ones. The difference between an active buzzer and
+a passive buzzer is: An active buzzer has a built-in oscillating source, so it will make sounds when
+electrified. But a passive buzzer does not have such source, so it will not beep if DC signals are used;
+instead, you need to use square waves whose frequency is between 2K and 5K to drive it. The active
+buzzer is often more expensive than the passive one because of multiple built-in oscillating circuits.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * Passive buzzer module
+- 1 * Active buzzer module
+- 1 * 3-Pin anti-reverse cable
+WHAT WE WANT TO DO
+1. Beep the active buzzer
+2. Play some melody with the passive buzzer
+HOW WE'RE GOING TO DO
+Active Buzzer
+Note: The active buzzer has built-in oscillating source, so it will beep as long as it is wired up, but it
+can only beep with fixed frequency.
+Step 1: Build the circuit
+T-Cobbler Active Buzzer Module
+GPIO17 SIG
+5V0 VCC
+GND GND
+34 www.sunfounder.com
+Step 2: Drag it
+Using the active buzzer is just like applying the relay in Lesson 4, so simply steps will be given here.
+For more, you can return to L4.
+1．Drag from to the scripting area.
+2．Select the values for the block.
+3．Click the block and listen whether the buzzer beeps.
+4．Change the value of output and click the block again. The beep stops? Right! 
+35 www.sunfounder.com
+Passive Buzzer
+Step 1: Build the circuit
+T-Cobbler Passive Buzzer Module
+GPIO17 SIG
+5V0 VCC
+GND GND
+Step 2: Drag it
+You can provide the passive buzzer different frequencies to make it beep different sounds, thus
+making multiple scales. In the module there's a block for the setup of the buzzer.
+1．In , click and drag and blocks
+into the scripting area. 
+36 www.sunfounder.com
+2．Enter values for the two blocks.
+These two blocks can control the passive buzzer, though a little different in results.
+The block includes a frequency parameter, so you can change its value
+to make the buzzer give out sounds of more scales. The ON and OFF, together with the delay
+module in last lesson, can control the lasting time of each note.
+The block includes an octave parameter, with CDEFGABC# on the list for
+choice. You can use the scales directly with no need to check the mapping table between scale
+and frequency. And the time behind will let you save the operation of switching off the buzzer.
+This block is like simplifying the application of the module and makes it easier to play some
+music.
+3．Now use the block to make a melody.
+Since the piece of music is a little long, here 4 self-defined blocks are used to make 4 bars of the
+entire piece and then combine them. About how to self-define a block, please return to Lesson
+5. See the below block for 1st bar:
+37 www.sunfounder.com
+4．Combine the 4 blocks completed and click to play.
+ 
+38 www.sunfounder.com
+Lesson 11 Reed Switch
+WHAT IS IT
+A reed switch (as shown below) is used to detect the magnetic field. Hall sensors are generally used
+to measure the speed of intelligent vehicles and count in assembly lines, while reed switches are
+often used to detect the existence of a magnetic field.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * Reed switch module
+- 1 * Dual-color LED module
+- 2 * 3-Pin anti-reverse cable
+- 1 * Magnet (Self provided)
+WHAT WE WANT TO DO
+In this lesson, we will use a reed-switch module to control a dual-color LED module.
+The LED flashes green at first. Place a magnet near the reed switch, and the LED will change to red,
+which means “Detected Magnetic Material!". Move away the magnet, and the LED will turn green
+again.
+HOW WE'RE GOING TO DO
+Step 1: Build the circuit
+T-Cobbler Reed Switch Module
+GPIO17 SIG
+5V0 VCC
+GND GND
+T-Cobbler Dual-color LED Module
+GPIO18 R
+GND GND
+GPIO27 G
+39 www.sunfounder.com
+Step 2: Drag it - drag the blocks and change the values just as in the previous lessons.
+40 www.sunfounder.com
+41 www.sunfounder.com
+Lesson 12 Photo-interrupter
+WHAT IS IT
+A photo-interrupter (as shown below) is a sensor with a light-emitting component and lightreceiving component packaged and placed on face-to-face. It applies the principle that light is
+interrupted when an object passes through the sensor. Therefore, photo-interrupters are widely used
+in speed measurement.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * Dual-color LED module
+- 1 * Photo-interrupter module
+- 2 * 3-Pin anti-reverse cable
+WHAT WE WANT TO DO
+In this experiment, we will turn an LED on or off by using this change.
+HOW WE'RE GOING TO DO
+Step 1: Build the circuit
+T-Cobbler Dual-Color LED Module
+GPIO18 R
+GND GND
+GPIO27 G
+T-Cobbler Photo-interrupter Module
+GPIO17 SIG
+5V0 VCC
+GND GND
+42 www.sunfounder.com
+Step 2: Drag it - drag the blocks and change the values just as in the previous lessons.
+Now the LED will light up green. Stick a piece of paper in the gap of photo interrupter. Then "Light
+was blocked" will be printed on the screen and the LED will flash red. Remove the paper, and the LED
+will turn green again. 
+43 www.sunfounder.com
+44 www.sunfounder.com
+Lesson 13 PCF8591
+WHAT IS IT
+The PCF8591 is device with four analog inputs, one analog output and a serial I2C-bus interface.
+Three address pins A0, A1 and A2 are used for programming the hardware address, allowing the use
+of up to eight devices connected to the I2C-bus without additional hardware.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * PCF8591 module
+- 1 * Dual-Color LED module
+- 1 * 3-Pin anti-reverse cable
+- Several Jumper wires (Male to Female)
+WHAT WE WANT TO DO
+There are two pins on the PCF8591 module. After they are connected, the potentiometer will input
+directly to AIN0. In this lesson, we'll use it to input analog values. The AIN0 (Analog Input 0) port is
+used to receive analog signals from the potentiometer module, and AOUT (Analog Output) is used
+to output analog signals to the dual-color LED module so as to change the luminance of the LED.
+HOW WE'RE GOING TO DO
+Step 1: Build the circuit
+Note: Connect the two pins next to the potentiometer of the
+PCF8591 module with the jumper cap attached.
+T-Cobbler PCF8591 Module
+SDA1 SDA
+SCL1 SCL
+3V3 VCC
+GND GND
+Dual-Color
+Module
+T-Cobbler PCF8591 Module
+R * AOUT
+GND GND GND
+G * * 
+45 www.sunfounder.com
+Step 2: Drag it
+1．Usually we need to set a variable to store the data returned by the block for convenient use later.
+○1 Click the category.
+○2 Click .
+○3 In the pop-up window, name the variable.
+○4. Click OK. Now you can see the created variable here. 
+46 www.sunfounder.com
+2．Then you can use the variable adc_val as a block. Use to store the data returned by
+the block to the newly-created variable.
+Drag into the scripting area, select adc_val on the triangle drop-down list.
+3．Click the Module category, click the block of adc collection into the second slot of .
+Click the block to run for once. Then the data collected by the adc pcf8591 will be written into
+the variable adc_val and stored. At the top right corner of stage, you can see the stored adc_val
+and data returned by the adc block.
+You can add a forever block for this set block, so the program will keep the setting for the variable
+forever. Then when you adjust the potentiometer, the data on stage will change in real time. 
+47 www.sunfounder.com
+4．Add the adc output so the experiment can be done as expected.
+Now, turn the knob of the potentiometer on PCF8591, and you can see the luminance of the LED
+change and a value between 0 and 255 printed on stage.
+48 www.sunfounder.com
+Lesson 14 Rain Detection Module
+WHAT IS IT
+The rain detection module detects rains on the board. Place the rain detection board in the open air.
+When it is raining, the rain detection module will sense the raindrops and send signals to the
+Raspberry Pi.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * Rain Detection module
+- 1 * PCF8591
+- 1 * LM393
+- 1 * 2-Pin ribbon cable
+- 1 * 4-Pin anti-reverse cable
+- Several Jumper wires (Male to Female)
+- 1 * glass of water (Self provided)
+WHAT WE WANT TO DO
+In this lesson we'll use a raindrop detection module to sense the rainy days.
+HOW WE'RE GOING TO DO
+There are two metal wires that are close to each other but do not cross on the rain detection board.
+When rain drops on the sensing section of the board, the two metal wires will conduct, thus there is
+a voltage between the two metal wires.
+Step 1: Build the circuit
+T-Cobbler PCF8591 Module
+SDA1 SDA
+SCL1 SCL
+3V3 VCC
+GND GND
+Rain Detection Board LM393
+- IN
+- GND
+LM393 T-Cobbler PCF8591 Module
+DO GPIO17 *
+AO * AIN0
+VCC 3V3 VCC
+GND GND GND
+49 www.sunfounder.com
+Note: The two pins on the rain detection board are exactly the same. You can connect them to pin IN
+and GND on LM393.
+Step 2: Drag it - familiar blocks, right? Check the last lesson if you forget how to make them. 
+50 www.sunfounder.com
+Now drop some water onto the rain detection board until "raining" displayed on stage. You can
+adjust the potentiometer on LM393 to detect the threshold of rainfall.
+51 www.sunfounder.com
+Lesson 15 Joystick PS2
+WHAT IS IT
+There are five operation directions for joystick PS2: up, down, left, right and press-down.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * PCF8591
+- 1 * Joystick PS2 module
+- 1 * 5-Pin anti-reverse cable
+- Several Jumper wires (Male to Female)
+WHAT WE WANT TO DO
+Control the sprite area on stage with the joystick.
+HOW WE'RE GOING TO DO
+This module has two analog outputs (corresponding to X and Y coordinates) and one digital output
+representing whether it is pressed on Z axis.
+In this experiment, we connect pin X and Y to the analog input ports of the A/D convertor so as to
+convert analog quantities into digital ones. Then program on Dragit to detect the moving direction
+of the joystick.
+Step 1: Build the circuit
+Tips:
+In lesson 13 we've connected the two pins on the PCF8591 module to use the built-in potentiometer.
+But now as we need to use the joystick to input to AIN0, we need to unplug the jumper cap to
+disconnect the pins. Otherwise, the pot on the adc module will still occupy the input.
+Joystick PS2 T-Cobbler PCF8591 Module
+Y * AIN0
+X * AIN1
+Bt 3V3 AIN2
+VCC 3V3 VCC
+GND GND GND
+T-Cobbler PCF8591 Module
+SDA1 SDA
+SCL1 SCL
+3V3 VCC
+GND GND
+52 www.sunfounder.com
+Step 2: Drag it
+If you cannot find some block quick, here's a shortcut: click on press Ctrl + F on the blocks area and
+enter the block you'd like to use:
+53 www.sunfounder.com
+First, get the value of adc AIN0 and adc AIN1 when the joystick is at the initial position. Then set the
+value for the 4 directions based on this value. Leave a gap between each limit value in case of error
+value due to the shaking of the joystick.
+Now move the joystick and check how the value will change on stage. 
+54 www.sunfounder.com
+55 www.sunfounder.com
+Lesson 16 Potentiometer Module
+WHAT IS IT
+A potentiometer is a device which is used to vary the resistance in an electrical circuit without
+interrupting the circuit.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * Potentiometer module
+- 1 * Dual-Color LED module
+- 2 * 3-Pin anti-reverse cable
+- Several Jumper wires (Male to Female)
+WHAT WE WANT TO DO
+This lesson is similar to Lesson 13. In this experiment, PCF8591 is used to read the analog value of the
+potentiometer and output the value to LED.
+HOW WE'RE GOING TO DO
+Step 1: Build the circuit
+T-Cobbler PCF8591 Module
+SDA1 SDA
+SCL1 SCL
+3V3 VCC
+GND GND
+Potentiometer T-Cobbler PCF8591 Module
+SIG * AIN0
+VCC 3V3 VCC
+GND GND GND
+Dual-Color Module T-Cobbler PCF8591 Module
+R * AOUT
+GND GND GND
+G * *
+56 www.sunfounder.com
+Step 2: Drag it - check the previous lesson for how to drag these out and set them.
+Turn the knob of the potentiometer, and you can see the value printed on the screen change from 0
+(minimum) to 255 (maximum).
+57 www.sunfounder.com
+58 www.sunfounder.com
+Lesson 17 Hall Sensor
+WHAT IS IT
+Based on Hall Effect, a Hall sensor is a one that varies its output voltage in response to a magnetic
+field. Hall sensors are used for proximity switching, positioning, speed detection, and current sensing
+applications.
+Hall sensors can be categorized into linear (analog) Hall sensors and switch Hall sensors. It includes
+amplifier, Schmitt trigger, and output terminal and it outputs digital values. A linear Hall sensor
+consists of Hall element, linear amplifier, and emitter follower and it outputs analog values. If you add
+a comparator to a linear (analog) Hall sensor it will be able to output both analog and digital signals.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * Analog Hall Switch module
+- 1 * Dual-color LED module
+- 1 * Switch hall module
+- 1 * PCF8591
+- 2 * 3-Pin anti-reverse cable
+- 1 * 4-Pin anti-reverse cable
+- Several Jumper wires (Male to Female)
+WHAT WE WANT TO DO
+This lesson let's move on to something more interesting - use the Hall sensor to detect a magnet
+field and unveil the results with a Dual-color LED module.
+HOW WE'RE GOING TO DO
+Hall sensor
+A Hall sensor is a kind of magnetic field sensor based on it.
+Electricity carried through a conductor will produce a magnetic field that varies with current, and a
+Hall sensor can be used to measure the current without interrupting the circuit. Typically, the sensor
+is integrated with a wound core or permanent magnet that surrounds the conductor to be measured.
+For switch Hall sensor, take the following steps
+59 www.sunfounder.com
+Step 1: Build the circuit
+Step 2: Drag it
+It's quite simple to apply this Hall sensor - just refer to Lesson11 reed switch.
+T-Cobbler Switch Hall Module
+GPIO17 SIG
+5V0 VCC
+GND GND
+T-Cobbler Dual-color LED Module
+GPIO18 R
+GND GND
+GPIO27 G
+60 www.sunfounder.com
+Put a magnet close to the Switch Hall sensor. Then a string “Detected magnetic materials” will be
+printed on the screen and the red LED will light up.
+For Analog Hall Switch, take the following steps:
+Step 1: Build the circuit
+T-Cobbler PCF8591 Module
+SDA1 SDA
+SCL1 SCL
+3V3 VCC
+GND GND
+Analog Hall Switch T-Cobbler PCF8591 Module
+DO GPIO17 *
+AO * AIN0
+VCC 3V3 VCC
+GND GND GND
+61 www.sunfounder.com
+Step 2: Drag it
+62 www.sunfounder.com
+The Analog Hall Switch sensor works just like the potentiometer in Lesson 16, reading the value
+returned.
+Then you can set a threshold based on that value. The values next to the threshold indicate the results
+of magnet field detection, by red and green marks.
+Put the magnet close to the analog Hall sensor, with the north magnetic pole towards the sensor,
+and then "Magnet: North." will be displayed. Move the magnet away, and "Magnet: None." will be
+printed. If the magnet approaches the sensor with the south magnetic pole towards it, "Magnet:
+South." will be printed on the screen.
+Note: Pin D0 of the Analog Hall Sensor will output "0" only when the south pole of the magnet
+approaches it, otherwise it will output "1".
+63 www.sunfounder.com
+Lesson 18 Temperature Sensor
+WHAT IS IT
+A temperature sensor is a component that senses temperature and converts it into output signals.
+By material and component features, temperature sensors can be divided into two types: thermal
+resistor and thermocouple. Thermistor is one kind of the former type. It is made of semiconductor
+materials; most thermistors are negative temperature coefficient (NTC) ones, the resistance of which
+decreases with rising temperature. Since their resistance changes acutely with temperature changes,
+thermistors are the most sensitive temperature sensors.
+There are two kinds of thermistor module in this kit (as shown below).
+
+Analog temperature sensor Thermistor
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * Analog-temperature Sensor module
+- 1 * Thermistor module
+- 1 * PCF8591
+- 1 * 3-Pin anti-reverse cable
+- 1 * 4-Pin anti-reverse cable
+- Several Jumper wires (Male to Female)
+WHAT WE WANT TO DO
+After learning experiments about rain, light, etc., let's move on to a sensor about temperature -
+detect by a temperature sensor.
+HOW WE'RE GOING TO DO
+This module is based on the principle of the thermistor, whose resistance varies significantly with
+ambient temperature. When the ambient temperature increases, the resistance of the thermistor
+decreases; when decreases, it increases. It can detect surrounding temperature changes in a realtime manner. 
+64 www.sunfounder.com
+Step 1: Build the circuit
+T-Cobbler PCF8591 Module
+SDA1 SDA
+SCL1 SCL
+3V3 VCC
+GND GND
+For thermistor module:
+For analog temperature sensor module:
+Thermistor Module T-Cobbler PCF8591 Module
+SIG * AIN0
+VCC 3V3 VCC
+GND GND GND
+65 www.sunfounder.com
+Step 2: Drag it
+Thermistor Module T-Cobbler PCF8591 Module
+DO GPIO17 *
+AO * AIN0
+VCC 3V3 VCC
+GND GND GND
+66 www.sunfounder.com
+Now touch the thermistor and you can see the value of current
+temperature printed on the screen change accordingly.
+Temperature alarm setting:
+If you pinch the thermistor for a while, its temperature will rise
+slowly. "Too Hot!" will be printed on the screen. Release your fingers, and let it stay in the open air
+for a while, or blow on the sensor. When the temperature drops down slowly, the warning will
+disappear.
+The physical picture for analog temperature sensor:
+The physical picture for thermistor module:
+67 www.sunfounder.com
+Lesson 19 Sound Sensor
+WHAT IS IT
+Sound sensor is a component that receives sound waves and converts them into electrical signal. It
+detects the sound intensity in ambient environment like a microphone.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * PCF8591
+- 1 * Sound sensor module
+- 1 * 3-Pin anti-reverse cable
+- Several Jumper wires (Male to Female)
+WHAT WE WANT TO DO
+Next, let's move on to sound - use a sound sensor to detect the sound in the ambient environment.
+HOW WE'RE GOING TO DO
+The microphone transforms sound signals into electrical signals and then sends out the signals to
+pin 2 of LM358 and outputs them to pin 1 (that's, pin SIG of the module) via the external circuit. Then
+use PCF8591 to read analog values.
+Step 1: Build the circuit
+T-Cobbler PCF8591 Module
+SDA1 SDA
+SCL1 SCL
+3V3 VCC
+GND GND
+Sound Sensor Module T-Cobbler PCF8591 Module
+SIG * AIN0
+VCC 3V3 VCC
+GND GND GND
+68 www.sunfounder.com
+Step 2: Drag it
+Now, speak close to or blow to the microphone, and you can see voice_value changed on the screen.
+69 www.sunfounder.com
+70 www.sunfounder.com
+Lesson 20 Photoresistor Module
+WHAT IS IT
+A photoresistor is a light-controlled variable resistor. The resistance of a photoresistor decreases
+with increasing incident light intensity.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * PCF8591
+- 1 * Photoresistor module
+- 1 * 3-Pin anti-reverse cable
+- Several Jumper wires (Male to Female)
+WHAT WE WANT TO DO
+In this lesson, we'll use a photoresistor to detect the light intensity around.
+HOW WE'RE GOING TO DO
+With light intensity increasing, the resistance of a photoresistor will decrease. Thus the output
+voltage changes. Analog signals collected by the photoresistor are converted to digital signals
+through PCF8591. Then these digital signals are transmitted to Dragiti and printed on the screen.
+Step 1: Build the circuit
+T-Cobbler PCF8591 Module
+SDA1 SDA
+SCL1 SCL
+3V3 VCC
+GND GND
+Photoresistor T-Cobbler PCF8591 Module
+SIG * AIN0
+VCC 3V3 VCC
+GND GND GND
+71 www.sunfounder.com
+Step 2: Drag it
+
+Now, change the light intensity (e.g. cover the module with a pad or shine a flashlight onto the
+sensor), and the value printed on the screen will change accordingly.
+72 www.sunfounder.com
+Lesson 21 Flame Sensor
+WHAT IS IT
+A flame sensor (as shown below) performs detection by capturing infrared rays with specific
+wavelengths from flame. It can be used to detect and warn of flames.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * Flame sensor module
+- 1 * PCF8591
+- 1 * 4-Pin anti-reverse cable
+- Several Jumper wires (Male to Female)
+WHAT WE WANT TO DO
+Let's play the role of firefighter! But start by using a flame sensor to detect flames first.
+HOW WE'RE GOING TO DO
+There are several types of flame sensors. In this experiment, we will use a far-infrared flame sensor. It
+can detect infrared rays with wavelength ranging from 700nm to 1000nm. A far-infrared flame probe
+converts the strength changes of external infrared light into current changes. And then it converts
+analog quantities into digital ones. In this experiment, connect pin D0 of the Flame Sensor module
+to a GPIO of Raspberry Pi to detect by programming whether any flame exists.
+Step 1: Build the circuit
+T-Cobbler PCF8591 Module
+SDA1 SDA
+SCL1 SCL
+3V3 VCC
+GND GND
+Thermistor Module T-Cobbler PCF8591 Module
+DO GPIO17 *
+AO * AIN0
+VCC 3V3 VCC
+GND GND GND
+73 www.sunfounder.com
+Step 2: Drag it
+Now, ignite a lighter near the sensor, within the range of 80cm, and "Fire!" will be displayed on the
+screen. If you put out the lighter or just move the flames away from the flame sensor, "Safe~" will be
+displayed then.
+74 www.sunfounder.com
+75 www.sunfounder.com
+Lesson 22 Gas Sensor
+WHAT IS IT
+Gas Sensor MQ-2 is a sensor for flammable gas and smoke by detecting the concentration of
+combustible gas in the air. They are used in gas detecting equipment for smoke and flammable
+gasses in household, industry or automobile.
+WHAT IS IT
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * Active Buzzer module
+- 1 * PCF8591
+- 1 * Gas sensor module
+- 1 * 3-Pin anti-reverse cable
+- 1 * 4-Pin anti-reverse cable
+- Several Jumper wires (Male to Female)
+WHAT WE NEED
+Well, to protect us and our stuff from burning, be cautious of smoke is necessary. So in this lesson,
+let's check how to make a smog alert with the gas sensor.
+HOW WE'RE GOING TO DO
+MQ-2 gas sensor is a kind of surface ion type and N-type semiconductors, which uses tin oxide
+semiconductor gas sensitive material. When ambient temperature is in 200 ~ 300℃, tin oxide will
+adsorb oxygen in the air and form oxygen anion adsorption to decrease electron density in
+semiconductor so as to increase its resistance. When in contact with the smoke, if grain boundary
+barrier is modulated by the smoke and changed, it could cause surface conductivity change. So you
+can gain the information of the smoke existence, The higher the smoke concentration is, the more
+conductive the material becomes, thus the lower the output resistance is.
+In this experiment, if harmful gases reach a certain concentration, the buzzer will beep to warn.
+76 www.sunfounder.com
+Step 1: Build the circuit
+T-Cobbler PCF8591 Module
+SDA1 SDA
+SCL1 SCL
+3V3 VCC
+GND GND
+Thermistor Module T-Cobbler PCF8591 Module
+DO GPIO17 *
+AO * AIN0
+VCC 3V3 VCC
+GND GND GND
+T-Cobbler Active Buzzer
+GPIO18 SIG
+5V VCC
+GND GND
+77 www.sunfounder.com
+Step 2: Drag it
+Place a lighter close to the MQ-2 gas sensor, and press the switch to release gasses. A value between
+0 and 255 will be displayed on the screen. If harmful gases reach a certain concentration, the buzzer
+will beep, and “Danger Gas!” will be printed on the screen.
+You can also turn the shaft of the potentiometer on the module to raise or reduce the concentration
+threshold.
+Note: The MQ-2 gas sensor needs to be heated up for a while. Wait until the value printed on screen
+stays steady and the sensor gets warm, which means it can work normally and sensitively at that time.
+It is normal that the gas sensor generates heat. Actually, the higher the temperature is, the more
+sensitive the sensor gets.
+78 www.sunfounder.com
+Lesson 23 IR Remote Control
+WHAT IS IT
+Each button of an IR remote control (as shown below) has a string of specific encoding. When a
+button is pressed, the IR transmitter in the remote control will send out the corresponding IR
+encoding signals. On the other side, when the IR receiver receives certain encoding signals, it will
+decode them to identify which button is pressed.
+What we WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * IR Receiver
+- 1 * RGB LED module
+- 1 * IR Remote Control
+- 1 * 3-Pin anti-reverse cable
+- 1 * 4-Pin anti-reverse cable
+What we want to do
+In this lesson we'll control the RGB LED with a different way - remote control.
+How we do that
+In this experiment use 9 buttons on the top of the remote to control the color of the RGB LED module.
+Each row represents one color, and each column represents the brightness.
+OFF Dark Bright
+Red
+Green
+Blue
+79 www.sunfounder.com
+Step 1: Build the circuit
+Note: In Dragit we've already set the GPIO26 as the channel for IR communication. So the pin SIG of
+the IR Receiver can only connect to GPIO26; otherwise, the IR Receiver can't communicate well.
+Step 2: Drag it
+1. First self-define some blocks for color to be used.
+For example, the OFF block is to set the color of the RGB to black, so you'll see it's "off".
+T-Cobbler RGB LED
+3V3 VCC
+GPIO17 R
+GPIO18 G
+GPIO27 B
+T-Cobbler IR Receiver
+GPIO26 SIG
+5V VCC
+GND GND
+80 www.sunfounder.com
+Set more blocks for other colors.
+Color correction by I/O:
+Based on the color combination and RGB working principles, we can use the I/O block in the
+Raspberry Pi category to control, to set the color as we want. This method is great since the setting
+can be more accurate and controllable. But it also has weakness - you need to set the output value
+of each pin. It's a PWM value and cannot be set based on the color parameter of the RGB.
+As shown above, you can use three I/O output blocks for an RGB LED block. 
+81 www.sunfounder.com
+After the self-customed block for RGB color is done, let's move on to the IR control part.
+2. Drag the blocks for IR control.
+First, make this chunk block to test the remote.
+After clicking it to run, orient the remote at the receiver, and press any key. Then the key should
+be printed on stage.
+Try to press all the keys to be used and see whether they can all be shown on stage for the test. In
+case of error, for a complex experiment, you'd better test for each step for guarantee. After
+confirming the key works well, click the red button at the top right corner to stop. Then move on
+to next steps.
+If "None" is printed all the time, there may be several possible reasons: 1) The remote is not
+oriented at the receiver, or the battery runs out energy; 2) Pin sig of the receiver is not connected
+to GPIO26, or the wire is loose on the breadboard; 3) Configuration of Dragit is incorrect. Well, for
+the first 2 issues, simply tackle them; but for the third, you need to refer to the beginning of this
+instruction documentation and repeat the Installation steps - the configuration will be carried
+during the course. 
+82 www.sunfounder.com
+If the problem is still unsolved, please post on our forum or email service@sunfounder.com.
+So now the remote control works normally. Let's make the whole program.
+After clicking it to run, orient the remote at the receiver, and press keys onside. Based on the key
+setting, the RGB LED should light up different colors when you press different keys.
+Each of the top three rows of buttons on the remote control represents a kind of color, i.e. red, green,
+and blue, top to bottom. Each column represents off, light, and dark. For example, press the second
+button (light) on the first row (red), and the LED will flash light red. You can use the remote to generate 
+83 www.sunfounder.com
+27 colors in total (including all the LEDs off). Try to change the color of the RGB LED with the 9 buttons!
+84 www.sunfounder.com
+Lesson 24 Touch Switch
+WHAT IS IT
+A touch sensor operate with the conductivity of human body. When you touch the metal on the base
+electrode of the transistor, the level of pin SIG will turn over.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * Touch sensor module
+- 1 * Dual-Color LED module
+- 2 * 3-Pin anti-reverse cable
+WHAT WE WANT TO DO
+In this lesson, we'll make a touch switch with the touch switch module.
+HOW WE'RE GOING TO DO
+In this experiment, touch the base electrode of the transistor by fingers to make it conduct as human
+body itself is a kind of conductor and an antenna that can receive electromagnetic waves in the air.
+These electromagnetic wave signals collected from the human body are amplified by the transistor
+and processed by the comparator on the module to output steady signals.
+Step 1: Build the circuit
+T-Cobbler Touch Sensor
+GPIO17 SIG
+5V VCC
+GND GND
+T-Cobbler Dual-Color LED
+GPIO18 R
+GND GND
+GPIO27 G
+85 www.sunfounder.com
+Step 2: Drag it
+Now, touch the metal disk, you can see the LED change its colors and "ON" and "OFF" printed on
+stage.
+86 www.sunfounder.com
+87 www.sunfounder.com
+Lesson 25 Ultrasonic Ranging Module
+WHAT IS IT
+The ultrasonic sensor uses sound to accurately detect objects and measure distances. It sends out
+ultrasonic waves and converts them into electronic signals.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * Ultrasonic ranging module
+- Several jumper wires (Male to Female)
+WHAT WE WANT TO DO
+Based on what we know of ultrasonic, in this lesson let's use this module to detect the distance and
+print the result on the screen.
+This sensor works by sending a sound wave out and calculating the time it takes for the sound wave
+to get back to the ultrasonic sensor. By doing this, it can tell us how far away objects are relative to
+the ultrasonic sensor.
+Test distance = (high level time * velocity of sound (340M/S)) / 2 (in meters)
+HOW WE'RE GOING TO DO
+Step 1: Build the circuit
+T-Cobbler RGB LED
+5V0 VCC
+GPIO17 Trig
+GPIO18 Echo
+GND GND
+88 www.sunfounder.com
+Step 2: Drag it - make the block as shown below.
+In the middle an if block is added, to eliminate the dramatically fluctuating data which is deemed
+invalid. The method of throwing away null data and adopting only valid data is what's called "filter".
+Now you can see the distance between the ultrasonic ranging module and the obstacle (like your
+palm) in front on stage. Sway your hand over the ultrasonic ranging module slowly and observe the
+distance value shown.
+89 www.sunfounder.com
+90 www.sunfounder.com
+Lesson 26 DS18B20 Temperature Sensor
+WHAT IS IT
+Temperature Sensor DS18B20 is a commonly used digital temperature sensor featured with small
+size, low-cost hardware, strong anti-interference capability and high precision. The digital
+temperature sensor is easy to wire and can be applied a various occasions after packaging. Different
+from conventional AD collection temperature sensors, it uses a 1-wire bus and can directly output
+temperature data.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * DS18B20 Temperature Sensor module
+- 1 * 3-Pin anti-reverse cable
+WHAT WE WANT TO DO
+Another temperature module! Try this more module digital one - DS18B20 module to detect the
+ambient temperature and print it on Dragit.
+HOW WE'RE GOING TO DO
+With a unique single-wire interface, DS18B20 requires only one pin for a two-way communication
+with a microprocessor. It supports multi-point networking to measure multi-point temperatures.
+Eight sensors can be connected at most, because it will consume too much power supply and cause
+low voltage thus harming the stability of transmission.
+When using the DS18B20, you need to connect a 10KΩ resistor to the middle pin DQ to pull up the
+level.
+Step 1：Build the circuit according to the following method
+Note: In Dragit, the W1 main line has already been set to
+GPIO4, so please connect pin SIG of the DS18b20 sensor to
+GPIO4; otherwise, the block cannot acquire the return
+value.
+T-Cobbler DS18B20 sensor
+5V0 VCC
+GPIO4 SIG
+GND GND
+91 www.sunfounder.com
+Step 2: Drag it
+Numbering of DS18B20: If multiple DS18B20 modules are
+connected in the circuit, they will be numbered separately. If only
+one connects, it’s numbered 0.
+Now, you can see the current temperature value displayed on the
+screen.
+92 www.sunfounder.com
+Lesson 27 Rotary Encoder Module
+WHAT IS IT
+A rotary encoder is an electro-mechanical device that converts the angular position or motion of a
+shaft or axle to analog or digital code. Rotary encoders are usually placed at the side which is
+perpendicular to the shaft. They act as sensors for detecting angle, speed, length, position, and
+acceleration in automation field.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * Rotary Encoder module
+- 1 * 5-Pin anti-reverse cable
+WHAT WE WANT TO DO
+Control the clockwise (CW) and counterclockwise (CCW) rotation of sprite by rotary encoder and
+record the times of rotation.
+When you spin the knob of the rotary encoder, pin CLK and DT output high or low levels. Based this
+output, you can tell whether the encoder's direction is CW or CCW. Press the knob, pin SW will output
+a High or Low level too, which can be used as a button.
+HOW WE'RE GOING TO DO
+Step 1: Build the circuit
+T-Cobbler Rotary Encoder Module
+GPIO17 CLK
+GPIO18 DT
+GPIO27 SW
+5V0 VCC
+GND GND
+93 www.sunfounder.com
+Step 2: Drag it
+
+Set a parameter count to record the times of rotation.
+After running the program, spin the knob.
+When you spin it clockwise, the sprite on Dragit rotates
+in the same direction, and the number of times of
+rotation is also shown by count.
+Spin the knob counter, so does sprite. And the number is
+shown at count.
+Press the knob, count will be cleared. 
+94 www.sunfounder.com
+95 www.sunfounder.com
+Lesson 28 Humiture Sensor
+WHAT IS IT
+The digital temperature and humidity sensor DHT11 is a composite sensor that contains a calibrated
+digital signal output of temperature and humidity. The technology of a dedicated digital modules
+collection and the temperature and humidity sensing technology are applied to ensure that the
+product has high reliability and excellent long-term stability.
+The sensor includes a resistive sense of wet component and an NTC temperature measurement
+device, and is connected with a high-performance 8-bit microcontroller.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * Humiture module
+- 1 * 3-Pin anti-reverse cable
+WHAT WE WANT TO DO
+Apart from reading temperature as we've done before, in this lesson, we'll read more - humidity,
+making it a humiture detection experiment.
+HOW WE'RE GOING TO DO
+The communication process begins with the DATA line sending start signal to DHT11, and DHT11
+receives the signal and returns an answer signal, then the host receives the answer signal and begins
+to receive 40-bit humiture data (8-bit humidity integer + 8-bit humidity decimal + 8-bit temperature
+integer + 8-bit temperature decimal + 8-bit checksum). For more information, please refer to the
+datasheet of DHT11.
+Step 1: Build the circuit
+T-Cobbler Humiture Module
+GPIO17 SIG
+5V VCC
+GND GND
+96 www.sunfounder.com
+Step 2: Drag it
+For
+the
+Dht11 block, you can set it
+to return a temperature (in Celsius or Kelvin) or humidity value.
+If ERR_CRC is returned, it's because the data received is incorrect. But if ERR_MISSING_DATA appears,
+it's because the data received is missing. Once it happens, you may check whether it's the line
+interference or loose connection. Don't worry - wait and see the next data which should be good
+then. 
+97 www.sunfounder.com
+98 www.sunfounder.com
+Lesson 29 IR Obstacle Avoidance Module
+WHAT IS IT
+An IR obstacle avoidance module (as shown below) uses infrared reflection principle to detect
+obstacles. When there is no object ahead, infrared-receiver cannot receive signals; when there is an
+object ahead, it will block and reflect infrared light, then infrared-receiver can receive signals.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * IR Obstacle module
+- 1 * 3-Pin anti-reverse cable
+WHAT WE WANT TO DO
+Detect obstacles by the IR sensor on this module.
+HOW WE'RE GOING TO DO
+An obstacle avoidance sensor mainly consists of an infrared-transmitter, an infrared-receiver and a
+potentiometer. According to the reflecting feature of an object, if there is no obstacle, emitted
+infrared ray will weaken with the propagation distance and finally disappear. If there is an obstacle,
+when infrared ray encounters an obstacle, it will be reflected back to the infrared-receiver. Then the
+infrared-receiver detects this signal and confirms an obstacle exists ahead.
+Note: The detection distance of the infrared sensor is adjustable - you may adjust it by the
+potentiometer.
+Experimental Procedures
+Step 1: Build the circuit
+T-Cobbler IR Obstacle
+Module
+GPIO17 SIG
+5V0 VCC
+GND GND
+99 www.sunfounder.com
+Step 2: Drag it
+Now, if there is an obstacle ahead, a string “Detected Barrier! ”
+will be printed on stage.
+100 www.sunfounder.com
+Lesson 30 I2C LCD1602
+WHAT IS IT
+LCD1602 is a character type liquid crystal display, which can display 32 (16*2) characters at the same
+time. It has 16 pins, of which at least 7 would be used each time. You can use a PCF8574 I2C chip to
+expand I/O ports so only two GPIO ports would be occupied.
+What we WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * I2C LCD1602
+- Several jumper wires (Male to Female)
+WHAT WE WANT TO DO
+In this lesson, we'll move on to some display - show character on an I2C LCD1602.
+HOW WE'RE GOING TO DO
+In this experiment, I2C is used to configure LCD so that you can control the LCD1602 to display
+characters.
+Step 1: Build the circuit
+T-Cobbler I2C LCD1602
+SDA1 SDA
+SCL1 SCL
+5V0 VCC
+GND GND
+101 www.sunfounder.com
+Step 2: Drag it
+1．There are three parameters for the print block: words - the characters to be shown on the LCD;
+row and col - where the first character appears. 
+102 www.sunfounder.com
+2．Use the clear block to clear the screen.
+3． You can also turn the shaft of the
+potentiometer on the module to raise or
+reduce the concentration threshold.
+Drag the blocks to combine.
+Now you can see “Greetings! From SunFounder” displayed on the LCD.
+103 www.sunfounder.com
+Lesson 31 Barometer BMP280
+WHAT IS IT
+The BMP280 is an absolute barometric pressure sensor especially designed for mobile applications.
+The sensor module is housed in an extremely compact 8-pin metal-lid LGA package with a footprint
+of only 2.0x2.5mm2
+and 0.95mm package height. Its small dimensions and low power consumption
+of 2.7µA@1Hz allow the implementation in battery-driven devices such as mobile phones, GPS
+modules or watches. It supports two types of communication: I2C and SPI.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1* Power Adapter for Raspberry Pi
+- 1 * SunFounder T Extension+40-pin Ribbon Cable for T-Cobbler
+- 1 * BMP280 Module
+- Several Jump Wires
+- 1 * Breadboard
+WHAT WE WANT TO DO
+Detect the air pressure with the barometer module.
+HOW WE'RE GOING TO DO
+First, get to know the pins on the module.
+Power
+ VCC: power pin. The working voltage for the chip is 1.71-3.6V. Since the module integrates a 3.3V
+voltage regulator, the power supply can be either 3.3V or 5V. If you are using an Arduino board, you're
+recommended to use a 5V power supply.
+ 3.3V: the output of the voltage regulator, meaning you can provide the chip with a 3.3V for power
+here.
+ GND: common ground for power and logic
+BMP280 supports I2C and SPI communication and the module keeps both ports. If you want to make
+the circuit simple, you can use the I2C port; to connect multiple sensors, you can use the SPI port free
+of I2C address collisions.
+- I2C interface
+The I2C interface uses the following pins:
+ SCK: serial clock (SCL)
+ SDI: data (SDA)
+ SDO: The I2C address decides the pin. If SDO connects to GND (0), the address is 0x76, if it connects
+to VDDIO (1), the address is 0x77. In this module, we have connected it to VDDIO, so the address 
+104 www.sunfounder.com
+should be 0x77.
+ CSB: Must be connected to VDDIO to select I2C interface.
+- SPI interface
+The SPI interface uses the following pins:
+ CSB: chip select, active low and has an integrated pull-up resistor
+ SCK: serial clock
+ SDI: serial data input; data input/output in 3-wire mode
+ SDO: serial data output; hi-Z in 3-wire mode
+Experimental Procedures
+I2C will be used as communication interface in the following experiment.
+Step 1: Build the circuit
+I2C wiring
+T-Cobbler PCF8591 Module
+SDA1 SDI
+SCL1 SCK
+5V VCC
+GND GND
+105 www.sunfounder.com
+Step 2: Drag it
+Now, you can see the figures of the temperature and the
+air pressure, which are read by the BMP280 on the
+LCD1602，whitch we had learn last lesson。
+The unit of temperature is Celsius degree.
+Unit of air pressure is mbar (1000 mbar = 1 bar).
+106 www.sunfounder.com
+Lesson 32 MPU6050 Gyro Acceleration Sensor
+WHAT IS IT
+The MPU-6050 is the world’s first and only 6-axis motion tracking devices designed for the low power,
+low cost, and high performance requirements of smartphones, tablets and wearable sensors.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * MPU-6050 module
+- 4 * Jumper wires (M to F) (the 4-pin anti-reverse cable more
+preferable)
+WHAT WE WANT TO DO
+Use the mpu6050 gyroscope sensor to detect the rotation of the module.
+HOW WE'RE GOING TO DO
+Here's how the axes are defined for MPU6050: Facing the upside of the chipset, with the labels/texts
+onside which can be read normally, take the center of the chip as the origin, horizontally right as the
+x axis, vertically up as the y axis, and the direction to yourself as the z axis, as shown below:
+Step 1: Build the circuit
+T-Cobbler PCF8591 Module
+SDA1 SDA
+SCL1 SCL
+5V VCC
+GND GND
+107 www.sunfounder.com
+Step 2: Drag the mpu6050 block to the code area.
+Step 3: Now you can see the values of the acceleration sensor, gyroscope, and XY-axis rotation read
+by MPU6050 printed on the screen constantly.
+108 www.sunfounder.com
+109 www.sunfounder.com
+Lesson 33 RTC DS1302
+WHAT IS IT
+DS1302 is a trickle charging clock chip, launched by DALLAS in America. With a built-in real-time
+clock/calendar and a 31-byte static RAM, it can communicate with MCU through simple serial
+interfaces. The real-time clock/calendar circuit provides information about second, minute, hour, day,
+month, and year. DS1302 can automatically adjust the number of days per month and days in leap
+year. You can determine to use a 24-hour or 12-hour system by AM/PM selection.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * DS1302 RTC module
+- 1 * 5-Pin anti-reverse cable
+WHAT WE WANT TO DO
+Set the time with the RTC module and read the time stored on the RTC.
+Interfacing the DS1302 with a microprocessor is simplified by using synchronous serial
+communication. Only three wires are required to communicate with the clock/RAM: RST, serial data
+(SDA) and serial clock (SCL). SDA can be transferred to and from the clock/RAM one byte at a time or
+in a burst of up to 31 bytes.
+HOW WE'RE GOING TO DO
+Step 1: Build the circuit
+Note: In Dragit, GPIO23, GPIO24 and GPIO25 have already been set as channels for RTC, so connect
+the RTC DS1302 to these pins; otherwise, the module cannot work.
+T-Cobbler I2C LCD1602
+SDA1 SDA
+SCL1 SCL
+5V0 VCC
+GND GND
+T-Cobbler RTC DS1302
+GPIO23 SCL
+GPIO24 I/O
+GPIO25 RST
+5V0 VCC
+GND GND
+110 www.sunfounder.com
+Step 2: Drag it
+Set the time on the DS1302 module with this block.
+Read the time on the module now.
+Print the date and time on the LCD with the chunk block: 
+111 www.sunfounder.com
+Place the chunk blocks in line. Click the green flag on the tool bar and the program will run based on
+the sequence you dragged the blocks. For example, I dragged the left chunk first, and then duplicate
+it to make the one on the right. So when the program is run, the screen of the LCD will first be cleared
+and then the date and time be printed on the screen.
+Now you can see the date and time on the screen.
+112 www.sunfounder.com
+Lesson 34 Tracking Sensor
+WHAT IS IT
+The infrared tracking sensor uses a TRT5000 sensor. The blue LED of TRT5000 is the emission tube
+and after electrified it emits infrared light invisible to human eye. The black part of the sensor is for
+receiving; the resistance of the resistor inside changes with the infrared light
+received.
+WHAT WE NEED
+- 1 * Raspberry Pi
+- 1 * Breadboard
+- 4 * Jumper wires (Male to Male, 2 red and 2 black)
+- 1 * Network cable (or USB wireless network adapter)
+- 1 * Tracking sensor module
+- 1 * 3-Pin anti-reverse cable
+WHAT WE WANT TO DO
+Detect black lines on a white surface with the Tracking Sensor.
+When the infrared transmitter emits rays to a piece of paper, if the rays shine on a white surface, they
+will be reflected and received by the receiver, and pin SIG will output low level; If the rays encounter
+black lines, they will be absorbed, thus the receiver gets nothing, and pin SIG will output high level.
+HOW WE'RE GOING TO DO
+Step 1: Build the circuit
+T-Cobbler Humiture Module
+GPIO17 SIG
+5V VCC
+GND GND
+113 www.sunfounder.com
+Step 2: Drag it
+When the tracking sensor encounters black lines, a string “Black Line is detected” will be printed on
+the screen.
+114 www.sunfounder.com
+</pre>
+    </body>    
+</html>
