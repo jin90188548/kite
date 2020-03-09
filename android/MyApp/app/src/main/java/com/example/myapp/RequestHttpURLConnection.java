@@ -13,7 +13,75 @@ import java.util.Map;
 
 public class RequestHttpURLConnection {
 
-    public String request(String _url, ContentValues _params){
+    public String request_get(String _url){
+
+        // HttpURLConnection 참조 변수.
+        HttpURLConnection urlConn = null;
+
+        /**
+         * 2. HttpURLConnection을 통해 web의 데이터를 가져온다.
+         * */
+        try{
+            URL url = new URL(_url);
+            urlConn = (HttpURLConnection) url.openConnection();
+
+            System.out.println("==================>>>>>> "+urlConn);
+
+            // [2-1]. urlConn 설정.
+            //urlConn.setRequestMethod("GET"); // URL 요청에 대한 메소드 설정 : POST.
+            //urlConn.setRequestProperty("Accept-Charset", "UTF-8"); // Accept-Charset 설정.
+            //urlConn.setRequestProperty("Context_Type", "application/x-www-form-urlencoded;cahrset=UTF-8");
+
+            urlConn.setReadTimeout(10000);
+            urlConn.setConnectTimeout(15000);
+            //urlConn.setRequestMethod("GET"); // URL 요청에 대한 메소드 설정 : GET/POST.
+
+            System.out.println("넌 누구냐 ?? --> " + urlConn.getRequestMethod());
+
+            urlConn.setUseCaches(false);
+            //urlConn.setDoOutput(true);
+            //urlConn.setDoInput(true);
+            urlConn.setRequestProperty("Accept-Charset", "utf-8"); // Accept-Charset 설정.
+            urlConn.setRequestProperty("Context_Type", "text/html");
+
+            // [2-3]. 연결 요청 확인.
+            // 실패 시 null을 리턴하고 메서드를 종료.
+            if (urlConn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                System.out.println(":::::::::::::::::::::::::::::::   fail");
+                return null;
+            }
+
+            // [2-4]. 읽어온 결과물 리턴.
+            // 요청한 URL의 출력물을 BufferedReader로 받는다.
+            BufferedReader reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream(), "UTF-8"));
+
+            // 출력물의 라인과 그 합에 대한 변수.
+            String line;
+            String page = "";
+
+            // 라인을 받아와 합친다.
+            while ((line = reader.readLine()) != null){
+                page += line;
+            }
+
+            System.out.println(page);
+
+            return page;
+
+        } catch (MalformedURLException e) { // for URL.
+            e.printStackTrace();
+        } catch (IOException e) { // for openConnection().
+            e.printStackTrace();
+        } finally {
+            if (urlConn != null)
+                urlConn.disconnect();
+        }
+
+        return null;
+
+    }
+
+    public String request_post(String _url, ContentValues _params){
 
         // HttpURLConnection 참조 변수.
         HttpURLConnection urlConn = null;
@@ -67,11 +135,15 @@ public class RequestHttpURLConnection {
 
             urlConn.setReadTimeout(10000);
             urlConn.setConnectTimeout(15000);
-            urlConn.setRequestMethod("POST"); // URL 요청에 대한 메소드 설정 : GET/POST.
-            urlConn.setDoOutput(true);
+            urlConn.setRequestMethod("GET"); // URL 요청에 대한 메소드 설정 : GET/POST.
+
+            System.out.println("넌 누구냐 ?? --> " + urlConn.getRequestMethod());
+
+            urlConn.setUseCaches(false);
+            //urlConn.setDoOutput(true);
             urlConn.setDoInput(true);
             urlConn.setRequestProperty("Accept-Charset", "utf-8"); // Accept-Charset 설정.
-            urlConn.setRequestProperty("Context_Type", "application/x-www-form-urlencoded");
+            urlConn.setRequestProperty("Context_Type", "text/html");
 
 
 

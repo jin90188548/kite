@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // URL 설정.
-        String url = "http://192.168.0.26:8080/iot/index.html";
+        String url = "http://192.168.0.64:5000/sw_r";
         //String url = "https://www.naver.com";
 
         // AsyncTask를 통해 HttpURLConnection 수행.
@@ -76,25 +76,23 @@ public class MainActivity extends AppCompatActivity {
 
             String result; // 요청 결과를 저장할 변수.
             RequestHttpURLConnection requestHttpURLConnection = new RequestHttpURLConnection();
-            result = requestHttpURLConnection.request(url, values); // 해당 URL로 부터 결과물을 얻어온다.
 
-            System.out.println(result);
-
-            tv.setText(result.substring(0,20)+"");
-
-            System.out.println(":::::::::::::::::::::::::========>>>>>>> : 확인");
+            result = requestHttpURLConnection.request_get(url); // 해당 URL로 부터 결과물을 얻어온다.
 
             return result;
         }
+
+
+
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            System.out.println(s.substring(0,20)+"");
+            System.out.println(s+"");
 
             //doInBackground()로 부터 리턴된 값이 onPostExecute()의 매개변수로 넘어오므로 s를 출력한다.
-            tv.setText(s.substring(0,20)+"");
+            tv.setText(s+"");
         }
     }
 

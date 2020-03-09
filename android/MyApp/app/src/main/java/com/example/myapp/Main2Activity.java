@@ -24,6 +24,6 @@ public class Main2Activity extends AppCompatActivity {
         wv.setWebViewClient(new WebViewClient());
 
         wv.loadUrl("file:///android_asset/br.html");
-        //wv.loadUrl("http://www.naver.com");
+        //wv.loadUrl("http://192.168.0.64:5000/sw_r");
     }
 }
