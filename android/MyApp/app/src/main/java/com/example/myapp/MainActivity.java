@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
             System.out.println(result);
 
-            tv.setText(result.substring(0,10)+"");
+            tv.setText(result.substring(0,20)+"");
 
             System.out.println(":::::::::::::::::::::::::========>>>>>>> : 확인");
 
@@ -91,10 +91,10 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            System.out.println(s.substring(0,10)+"");
+            System.out.println(s.substring(0,20)+"");
 
             //doInBackground()로 부터 리턴된 값이 onPostExecute()의 매개변수로 넘어오므로 s를 출력한다.
-            tv.setText(s.substring(0,10)+"");
+            tv.setText(s.substring(0,20)+"");
         }
     }
 
