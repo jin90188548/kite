@@ -7,11 +7,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.CompoundButton;
 import android.widget.RadioGroup;
+import android.widget.SeekBar;
 import android.widget.Switch;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     Switch sw_red;
+    SeekBar sb_red;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,30 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        sb_red = findViewById(R.id.seekBar_red);
+        sb_red.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                String url = "http://192.168.0.64:5000/pwm?led=r&p_val="+progress;
+                // AsyncTask를 통해 HttpURLConnection 수행.
+                NetworkTask networkTask = new NetworkTask(url, null);
+                networkTask.execute();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+
+
 
     }
 
