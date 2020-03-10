@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, abort
+from flask import Flask, jsonify, abort, make_response
 
 app = Flask(__name__)
 
@@ -32,9 +32,17 @@ def led_get(led_id):
         }
 
     if led_id > 9:
-        abort(500)
+        abort(404)
 
     return jsonify(data_dic)
+
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'not used led Number'}), 404)
+
+
+
+
 
 
 if __name__ == '__main__':
