@@ -1,10 +1,22 @@
-from flask import Flask, jsonify, abort, make_response
+from flask import Flask, jsonify, abort, make_response, request
 
 app = Flask(__name__)
 
-@app.route('/')
-def index():
-    return '<h1>Hello~!!</h1>'
+@app.route('/logs/v1/<date>')
+def index(date):
+    #str_param = request.args.get()
+
+    contents = ''
+
+    with open('phonebook_'+date+'.log', 'r') as file:
+        contents = '<h1>'+date+'</h1>'
+        line = None    # 변수 line을 None으로 초기화
+        while line != '':
+            line = file.readline()
+            contents += line + '<br>'
+
+
+    return contents
 
 @app.route('/rest/v1/data', methods=['GET'])  
 def data_get():
